@@ -29,6 +29,24 @@ TUXBOX_APPS_DVB
 AM_CONDITIONAL(HAVE_GIT_DIR, test -d "$srcdir/.git")
 AM_CONDITIONAL(HAVE_FAKE_GIT_DIR, test -f "$srcdir/.git/last_commit_info")
 
+AC_ARG_ENABLE(spark,
+	[  --enable-spark            enable spark stuff],
+	[AC_DEFINE(ENABLE_SPARK, 1, [enable spark stuff])])
+
+AM_CONDITIONAL(ENABLE_SPARK, test "$enable_spark" = "yes")
+if test "$enable_spark" = "yes"; then
+	AC_DEFINE(ENABLE_SPARK, 1, [enable spark stuff])
+fi
+
+AC_ARG_ENABLE(spark7162,
+	[  --enable-spark7162            enable spark7162 stuff],
+	[AC_DEFINE(ENABLE_SPARK7162, 1, [enable spark7162 stuff])])
+
+AM_CONDITIONAL(ENABLE_SPARK7162, test "$enable_spark7162" = "yes")
+if test "$enable_spark7162" = "yes"; then
+	AC_DEFINE(ENABLE_SPARK7162, 1, [enable spark7162 stuff])
+fi
+
 dnl versions of plugins-base
 PKG_CHECK_MODULES(TUXTXT, tuxbox-tuxtxt)
 PKG_CHECK_MODULES(BASE, [freetype2 fribidi glib-2.0 libdvbsi++ libpng libxml-2.0 sigc++-2.0 libssl libcrypto])
@@ -185,6 +203,15 @@ if test x"$with_lcddev" != xno ; then
 	AC_DEFINE_UNQUOTED(LCD_DEV, "$withval", [Defines which device to use for lcd (e.g. /dev/fb1)])
 fi
 
+AC_ARG_ENABLE([sh],
+        [AS_HELP_STRING(--enable-sh,    enable sh patches)],
+        [case "${enableval}" in
+                yes) enable_sh=true ;;
+                no) enable_sh=false ;;
+                *) AC_MSG_ERROR([bad value ${enableval} for --enable-sh]) ;;
+        esac])
+AM_CONDITIONAL([ENABLE_SH], [test x$enable_sh = xtrue])
+
 AC_ARG_WITH(alphablendingacceleration,
 	AC_HELP_STRING([--with-alphablendingacceleration=never/always/auto], [alphablending acceleration strategy: never accelerate / always accelerate / automatically decide when to accelerate (default)]),
 	[[with_alphablendingacceleration=$withval]],
@@ -335,6 +362,12 @@ lib/python/Plugins/SystemPlugins/Videomode/Makefile
 lib/python/Plugins/SystemPlugins/Videomode/meta/Makefile
 lib/python/Plugins/SystemPlugins/WirelessLan/Makefile
 lib/python/Plugins/SystemPlugins/WirelessLan/meta/Makefile
+lib/python/Plugins/SystemPlugins/VFD-Icons/Makefile
+lib/python/Plugins/SystemPlugins/VFD-Icons/meta/Makefile
+lib/python/Plugins/SystemPlugins/SH4OSDAdjustment/Makefile
+lib/python/Plugins/SystemPlugins/SH4OSDAdjustment/meta/Makefile
+lib/python/Plugins/SystemPlugins/SH4BoosterControl/Makefile
+lib/python/Plugins/SystemPlugins/SH4BoosterControl/meta/Makefile
 lib/python/Tools/Makefile
 po/Makefile
 main/Makefile

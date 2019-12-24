@@ -13,10 +13,18 @@ def setPosition(dst_left, dst_width, dst_top, dst_height):
 	if dst_top + dst_height > 576:
 		dst_height = 576 - dst_top
 	try:
-		open("/proc/stb/fb/dst_left", "w").write('%08x' % dst_left)
-		open("/proc/stb/fb/dst_width", "w").write('%08x' % dst_width)
-		open("/proc/stb/fb/dst_top", "w").write('%08x' % dst_top)
-		open("/proc/stb/fb/dst_height", "w").write('%08x' % dst_height)
+		file = open("/proc/stb/vmpeg/0/dst_left", "w")
+		file.write('%X' % dst_left)
+		file.close()
+		file = open("/proc/stb/vmpeg/0/dst_width", "w")
+		file.write('%X' % dst_width)
+		file.close()
+		file = open("/proc/stb/vmpeg/0/dst_top", "w")
+		file.write('%X' % dst_top)
+		file.close()
+		file = open("/proc/stb/vmpeg/0/dst_height", "w")
+		file.write('%X' % dst_height)
+		file.close()
 	except:
 		return
 

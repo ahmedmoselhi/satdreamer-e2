@@ -30,6 +30,9 @@ QUIT_IMAGE_RESTORE = 43
 class Standby(Screen):
 	def Power(self):
 		print "[Standby] leave standby"
+#+++>
+		open("/proc/stb/hdmi/output", "w").write("on")
+#+++<
 		self.close(True)
 
 	def setMute(self):
@@ -102,6 +105,11 @@ class Standby(Screen):
 		else:
 			self.avswitch.setInput("AUX")
 
+		Console().ePopen("/bin/vdstandby -a &")
+
+#+++>
+		open("/proc/stb/hdmi/output", "w").write("off")
+#+++<
 		gotoShutdownTime = int(config.usage.standby_to_shutdown_timer.value)
 		if gotoShutdownTime:
 			self.standbyTimeoutTimer.startLongTimer(gotoShutdownTime)
@@ -140,6 +148,7 @@ class Standby(Screen):
 			RecordTimer.RecordTimerEntry.stopTryQuitMainloop()
 		self.avswitch.setInput("ENCODER")
 		self.leaveMute()
+		Console().ePopen("/bin/vdstandby -d &")
 		if os.path.exists("/usr/script/standby_leave.sh"):
 			Console().ePopen("/usr/script/standby_leave.sh")
 		if config.usage.remote_fallback_import_standby.value:

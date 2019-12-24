@@ -83,7 +83,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self.yes_no = ConfigYesNo(default = True, graphic = False)
 			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.save_new_position = False
-			setPosition(0, 720, 0, 576)
+			setPosition(0, 0, 0, 0)
 		elif self.step == 2:
 			self.Timer.stop()
 			self["title"].setText(_("Overscan wizard"))
@@ -94,7 +94,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Did you see all eight arrow heads?"), self.yes_no))
 			self.yes_no.value = True
 			self.save_new_position = False
-			setPosition(0, 720, 0, 576)
+			setPosition(0, 0, 0, 0)
 		elif self.step == 3:
 			self["introduction"].setText(_("You did not see all eight arrow heads. This means your TV has overscan enabled "
 				"and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this "
@@ -171,7 +171,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 		if self.step == 1:
 			self.step = self.yes_no.value and 5 or 2
 		elif self.step == 2:
-			self.step = self.yes_no.value and 5 or os.path.exists("/proc/stb/fb/dst_left") and 3 or 4
+			self.step = self.yes_no.value and 5 or os.path.exists("/proc/stb/vmpeg/0/dst_left") and 3 or 4
 		elif self.step == 3:
 			self.save_new_position = True
 			self.step = 5

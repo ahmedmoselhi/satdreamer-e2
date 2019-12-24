@@ -3191,6 +3191,9 @@ msgstr "Включить обнаружение конфликтов тайме�
 msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
 msgstr "Значение для таких параметров, как 'да/нет', 'включить/выключить' и 'вкл/выкл', будет заменено графическим переключателем."
 
+msgid "Enable translit?"
+msgstr "Включить транслит?"
+
 msgid "Enable volume control with arrow buttons"
 msgstr "Включить управление громкостью на кнопках со стрелками"
 
@@ -4624,6 +4627,12 @@ msgstr "Адаптер LAN"
 
 msgid "LAN connection"
 msgstr "Подключение LAN"
+
+msgid "LED on VFD display"
+msgstr "Светодиоды в рабочем режиме"
+
+msgid "LED on VFD in standby"
+msgstr "Светодиоды в режиме ожидания"
 
 msgid "LNB"
 msgstr "Номер LNB"
@@ -7879,7 +7888,13 @@ msgstr "Показывать уведомление, когда импорт к�
 msgid "Show notification when import channels was successful"
 msgstr "Показывать уведомление, когда импорт каналов удался"
 
-msgid "Show packages to be updated"
+msgid "Show on VFD display"
+msgstr "Отображать в рабочем режиме"
+
+msgid "Show on VFD in standby"
+msgstr "Отображать в режиме ожидания"
+
+msgid "Show packages to be upgraded"
 msgstr "Показать пакеты, которые будут обновлены"
 
 msgid "Show picons in channel selection list"
@@ -9724,6 +9739,15 @@ msgstr "Обычно когда язык субтитров совпадает �
 msgid "Uzbekistan"
 msgstr "Uzbekistan"
 
+msgid "VFD Display"
+msgstr "VFD Экран"
+
+msgid "VFD display config"
+msgstr "Конфигурация VFD экрана"
+
+msgid "VFD display configuration"
+msgstr "Конфигурация VFD экрана"
+
 msgid "VCR scart"
 msgstr "Видеомагнитофон (VCR скарт)"
 
@@ -10736,6 +10760,9 @@ msgstr "черное & белое"
 msgid "blacklist"
 msgstr "черный список"
 
+msgid "blank"
+msgstr "ничего"
+
 msgid "blue"
 msgstr "синий"
 
@@ -10760,6 +10787,12 @@ msgstr "по центру"
 msgid "centered, wrapped"
 msgstr "по центру, завернутый"
 
+msgid "channel name"
+msgstr "название канала"
+
+msgid "channel number"
+msgstr "номер канала"
+
 msgid "chapters"
 msgstr "разделы"
 
@@ -10774,6 +10807,9 @@ msgstr "круговая правая"
 
 msgid "clip overscan / letterbox borders"
 msgstr "изменение границ видео / переразвертка"
+
+msgid "clock"
+msgstr "часы"
 
 msgid "comedy"
 msgstr "комедия"
@@ -10993,6 +11029,9 @@ msgstr "захват этого кадра как растровое изобр�
 
 msgid "green"
 msgstr "зеленый"
+
+msgid "green & red"
+msgstr "зеленый и красный"
 
 msgid "handicraft"
 msgstr "ремесло"

@@ -4,6 +4,32 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 datarootdir=@datarootdir@
 
+# write -E2- on vfd display
+echo "-E2-" > /dev/vfd
+
+if [ -e @libdir@/enigma2/python/Plugins/SystemPlugins/SH4BoosterControl/plugin.pyo ]; then
+	cpufreq=`cat /etc/enigma2/settings | grep config.plugins.booster.normalfrequenz | cut -d "=" -f2`
+	case $cpufreq in
+		200) overclk=5123;;
+		300) overclk=2561;;
+		450) overclk=3841;;
+		500) overclk=12803;;
+		540) overclk=4609;;
+		600) overclk=5121;;
+		630) overclk=5377;;
+		650) overclk=16643;;
+		700) overclk=17923;;
+		710) overclk=18179;;
+		750) overclk=19203;;
+		775) overclk=39686;;
+		800) overclk=20483;;
+		*) cpufreq=450
+		overclk=3841;;
+	esac
+	echo $overclk > /proc/cpu_frequ/pll0_ndiv_mdiv
+	echo "[enigma2] Setting CPU clock speed to $cpufreq MHz (overclk=$overclk)"
+fi
+
 if [ -d /home/root ]; then
 	export HOME=/home/root
 	cd
@@ -103,15 +129,7 @@ while : ; do
 			done < /tmp/upgrade_mountpoints.txt
 			# bind the console (when available)
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-			prevupd=0
-			currupd=999
-			opkg update 2>&1 | tee /home/root/ipkgupgrade.log
-			while [ $currupd -gt 0 -a $currupd -ne $prevupd ]; do
-				opkg upgrade $DESTS 2>&1 | tee -a /home/root/ipkgupgrade.log
-				prevupd=$currupd
-				currupd=`opkg list-upgradable | wc -l`
-				echo "===> $currupd PACKAGE(S) REMAINING" >> /home/root/ipkupgrade.log
-			done
+			( opkg upgrade sysvinit && opkg upgrade sysvinit-pidof && opkg upgrade initscripts-functions && opkg upgrade busybox && opkg upgrade kmod && opkg list-upgradable $DESTS | cut -f 1 -d ' ' | xargs opkg upgrade $DESTS ) 2>&1 | tee /home/root/ipkgupgrade.log
 			/sbin/reboot
 			;;
 		43)
