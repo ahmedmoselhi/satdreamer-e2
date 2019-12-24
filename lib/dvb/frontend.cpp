@@ -727,7 +727,11 @@ int eDVBFrontend::openFrontend()
 		}
 	}
 
+#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
 	m_multitype = m_delsys[SYS_DVBS] && (m_delsys[SYS_DVBT] || m_delsys[SYS_DVBC_ANNEX_A]);
+#else
+	m_multitype = m_delsys[SYS_DVBS] && (m_delsys[SYS_DVBT] || m_delsys[SYS_DVBC_ANNEX_AC]);
+#endif
 
 	if (!m_multitype)
 		m_type = feSatellite;
@@ -934,7 +938,11 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	int cab_max = 4200;
 	int atsc_max = 4200;
 
-	if (!strcmp(m_description, "AVL2108")) // ET9000
+	if (strstr(m_description, "STV090x Multistandard"))
+	{
+		ret = (int)(snr / 32.768);
+	}
+	else if (!strcmp(m_description, "AVL2108")) // ET9000
 	{
 		ret = (int)(snr / 40.5);
 		sat_max = 1618;
@@ -1183,7 +1191,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		switch (parm.system)
 		{
 			case eDVBFrontendParametersTerrestrial::System_DVB_T:
-			case eDVBFrontendParametersTerrestrial::System_DVB_T2: 
+			case eDVBFrontendParametersTerrestrial::System_DVB_T2:
 			case eDVBFrontendParametersTerrestrial::System_DVB_T_T2: ret = (int)(snr / 58); ter_max = 1700; break;
 			default: break;
 		}
@@ -2944,7 +2952,11 @@ bool eDVBFrontend::setDeliverySystem(const char *type)
 	}
 	else if (!strcmp(type, "DVB-C"))
 	{
+#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
 		p[0].u.data = SYS_DVBC_ANNEX_A;
+#else
+		p[0].u.data = SYS_DVBC_ANNEX_AC;
+#endif
 		fetype = feCable;
 	}
 	else if (!strcmp(type, "ATSC"))
@@ -3076,11 +3088,16 @@ std::string eDVBFrontend::getCapabilities()
 		case SYS_ISDBS:		ss << " ISDBS"; break;
 		case SYS_ISDBT:		ss << " ISDBT"; break;
 		case SYS_UNDEFINED:	ss << " UNDEFINED"; break;
+#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
 		case SYS_DVBC_ANNEX_A:	ss << " DVBC_ANNEX_A"; break;
 		case SYS_DVBC_ANNEX_C:	ss << " DVBC_ANNEX_C"; break;
-		case SYS_DVBT2:		ss << " DVBT2"; break;
 		case SYS_TURBO:		ss << " TURBO"; break;
 		case SYS_DTMB:		ss << " DTMB"; break;
+#else
+		case SYS_DVBC_ANNEX_AC:	ss << " DVBC_ANNEX_AC"; break;
+		case SYS_DMBTH:         ss << " DMBTH"; break;
+#endif
+		case SYS_DVBT2:		ss << " DVBT2"; break;
 		}
 	}
 
