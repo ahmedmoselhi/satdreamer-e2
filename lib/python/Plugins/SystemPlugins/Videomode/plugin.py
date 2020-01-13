@@ -68,9 +68,7 @@ class VideoSetup(Screen, ConfigListScreen):
 				self.list.append(getConfigListEntry(_("Resolution"), config.av.videorate[config.av.videomode[config.av.videoport.value].value], _("Configure the screen resolution in PC output mode.")))
 			else:
 				self.list.append(getConfigListEntry(_("Refresh rate"), config.av.videorate[config.av.videomode[config.av.videoport.value].value], _("Configure the refresh rate of the screen.")))
-#+++>
-		self.list.append(getConfigListEntry(_("3D Mode"), config.av.threedmode))
-#+++<
+		self.list.append(getConfigListEntry(_("3d mode"), config.av.threedmode))
 
 		port = config.av.videoport.value
 		if port not in config.av.videomode:
@@ -92,34 +90,14 @@ class VideoSetup(Screen, ConfigListScreen):
 		elif config.av.aspect.value == "4_3":
 			self.list.append(getConfigListEntry(_("Display 16:9 content as"), config.av.policy_169, _("When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture.")))
 
-		if config.av.videoport.value == "DVI":
-			if level >= 1:
-				self.list.append(getConfigListEntry(_("Allow unsupported modes"), config.av.edid_override, _("When selected this allows video modes to be selected even if they are not reported as supported.")))
-				if SystemInfo["HasBypassEdidChecking"]:
-					self.list.append(getConfigListEntry(_("Bypass HDMI EDID checking"), config.av.bypassEdidChecking, _("Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs.")))
-				if SystemInfo["HasColorspace"]:
-					self.list.append(getConfigListEntry(_("HDMI Colorspace"), config.av.hdmicolorspace, _("This option allows you to configure the Colorspace from Auto to RGB")))
-				if SystemInfo["HasColordepth"]:
-					self.list.append(getConfigListEntry(_("HDMI Colordepth"), config.av.hdmicolordepth, _("This option allows you to configure the Colordepth for UHD")))
-				if SystemInfo["HasColorimetry"]:
-					self.list.append(getConfigListEntry(_("HDMI Colorimetry"), config.av.hdmicolorimetry, _("This option allows you to configure the Colorimetry for HDR.")))
-				if SystemInfo["HasHdrType"]:
-					self.list.append(getConfigListEntry(_("HDMI HDR Type"), config.av.hdmihdrtype, _("This option allows you to configure the HDR type.")))
-				if SystemInfo["HasHDMIpreemphasis"]:
-					self.list.append(getConfigListEntry(_("Use HDMI pre-emphasis"), config.av.hdmipreemphasis, _("This option can be useful for long HDMI cables.")))
-				if SystemInfo["HDRSupport"]:
-					self.list.append(getConfigListEntry(_("HLG support"), config.av.hlg_support,_("This option allows you to force the HLG modes for UHD")))
-					self.list.append(getConfigListEntry(_("HDR10 support"), config.av.hdr10_support,_("This option allows you to force the HDR10 modes for UHD")))
-					self.list.append(getConfigListEntry(_("Allow 12bit"), config.av.allow_12bit,_("This option allows you to enable or disable the 12 bit color mode")))
-					self.list.append(getConfigListEntry(_("Allow 10bit"), config.av.allow_10bit,_("This option allows you to enable or disable the 10 bit color mode")))
-					
+#		if config.av.videoport.value == "DVI":
 #+++>
 		if config.av.videoport.value == "Component":
-			self.list.append(getConfigListEntry(_("Color Format"), config.av.colorformat_yuv))
+			self.list.append(getConfigListEntry(_("Color format"), config.av.colorformat_yuv))
 
 		if config.av.videoport.value == "HDMI":
-			self.list.append(getConfigListEntry(_("Color Format"), config.av.colorformat_hdmi))
-			self.list.append(getConfigListEntry(_("Audio Source"), config.av.hdmi_audio_source))
+			self.list.append(getConfigListEntry(_("Color format"), config.av.colorformat_hdmi))
+			self.list.append(getConfigListEntry(_("Audio source"), config.av.hdmi_audio_source))
 #+++<
 		if config.av.videoport.value == "Scart":
 			self.list.append(getConfigListEntry(_("Color format"), config.av.colorformat, _("Configure which color format should be used on the SCART output.")))
@@ -129,7 +107,7 @@ class VideoSetup(Screen, ConfigListScreen):
 					self.list.append(getConfigListEntry(_("Auto scart switching"), config.av.vcrswitch, _("When enabled, your receiver will detect activity on the VCR SCART input.")))
 
 		if level >= 1:
-			self.list.append(getConfigListEntry(_("Audio volume step size"), config.av.volume_stepsize, _("Configure the general audio volume step size (limit 1-10).")))
+			self.list.append(getConfigListEntry(_("Allow unsupported modes"), config.av.edid_override, _("When selected this allows video modes to be selected even if they are not reported as supported.")))
 			if SystemInfo["CanDownmixAC3"]:
 				self.list.append(getConfigListEntry(_("AC3 downmix"), config.av.downmix_ac3, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
 			if SystemInfo["CanDownmixDTS"]:
@@ -142,23 +120,31 @@ class VideoSetup(Screen, ConfigListScreen):
 			))
 			if SystemInfo["HasMultichannelPCM"]:
 				self.list.append(getConfigListEntry(_("Multichannel PCM"), config.av.multichannel_pcm, _("Configure whether multi channel PCM sound should be enabled.")))
-			if SystemInfo["HasAutoVolume"] or SystemInfo["HasAutoVolumeLevel"]:
-				self.list.append(getConfigListEntry(_("Audio auto volume level"), SystemInfo["HasAutoVolume"] and config.av.autovolume or config.av.autovolumelevel, _("This option allows you can to set the auto volume level.")))
-			if SystemInfo["Has3DSurround"]:
-				self.list.append(getConfigListEntry(_("3D surround"), config.av.surround_3d, _("This option allows you to enable 3D surround sound.")))
-				if SystemInfo["Has3DSpeaker"] and config.av.surround_3d.value != "none":
-					self.list.append(getConfigListEntry(_("3D surround speaker position"), config.av.speaker_3d, _("This option allows you to change the virtuell loadspeaker position.")))
-			if SystemInfo["Has3DSurroundSpeaker"]:
-				self.list.append(getConfigListEntry(_("3D surround speaker position"), config.av.surround_3d_speaker, _("This option allows you to disable or change the virtuell loadspeaker position.")))
-				if SystemInfo["Has3DSurroundSoftLimiter"] and config.av.surround_3d_speaker.value != "disabled":
-					self.list.append(getConfigListEntry(_("3D surround softlimiter"), config.av.surround_softlimiter_3d, _("This option allows you to enable 3D surround softlimiter.")))
+			self.list.append(getConfigListEntry(_("Audio volume step size"), config.av.volume_stepsize, _("Configure the general audio volume step size (limit 1-10).")))
 
 		if SystemInfo["CanChangeOsdAlpha"]:
 			self.list.append(getConfigListEntry(_("OSD transparency"), config.av.osd_alpha, _("Configure the transparency of the OSD.")))
 
 		if not isinstance(config.av.scaler_sharpness, ConfigNothing):
 			self.list.append(getConfigListEntry(_("Scaler sharpness"), config.av.scaler_sharpness, _("Configure the sharpness of the video scaling.")))
-
+		if SystemInfo["HasBypassEdidChecking"]:
+			self.list.append(getConfigListEntry(_("Bypass HDMI EDID checking"), config.av.bypassEdidChecking, _("Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs.")))
+		if SystemInfo["HasColorspace"]:
+			self.list.append(getConfigListEntry(_("HDMI Colorspace"), config.av.hdmicolorspace, _("This option allows you to configure the Colorspace from Auto to RGB")))
+		if SystemInfo["HasColordepth"]:
+			self.list.append(getConfigListEntry(_("HDMI Colordepth"), config.av.hdmicolordepth, _("This option allows you to configure the Colordepth for UHD")))
+		if SystemInfo["HasColorimetry"]:
+			self.list.append(getConfigListEntry(_("HDMI Colorimetry"), config.av.hdmicolorimetry, _("This option allows you to configure the Colorimetry for HDR.")))
+		if SystemInfo["HasHdrType"]:
+			self.list.append(getConfigListEntry(_("HDMI HDR Type"), config.av.hdmihdrtype, _("This option allows you to configure the HDR type.")))
+		if SystemInfo["HasHDMIpreemphasis"]:
+			self.list.append(getConfigListEntry(_("Use HDMI pre-emphasis"), config.av.hdmipreemphasis, _("This option can be useful for long HDMI cables.")))
+		if SystemInfo["HDRSupport"]:
+			self.list.append(getConfigListEntry(_("HLG support"), config.av.hlg_support,_("This option allows you to force the HLG modes for UHD")))
+			self.list.append(getConfigListEntry(_("HDR10 support"), config.av.hdr10_support,_("This option allows you to force the HDR10 modes for UHD")))
+			self.list.append(getConfigListEntry(_("Allow 12bit"), config.av.allow_12bit,_("This option allows you to enable or disable the 12 bit color mode")))
+			self.list.append(getConfigListEntry(_("Allow 10bit"), config.av.allow_10bit,_("This option allows you to enable or disable the 10 bit color mode")))
+	
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -283,5 +269,5 @@ def Plugins(**kwargs):
 		PluginDescriptor(name=_("Video setup"), description=_("Advanced video setup"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=startSetup)
 	]
 	if config.misc.videowizardenabled.value:
-		list.append(PluginDescriptor(name=_("Video wizard"), where = PluginDescriptor.WHERE_WIZARD, needsRestart = False, fnc=(20, VideoWizard)))
+		list.append(PluginDescriptor(name=_("Video wizard"), where = PluginDescriptor.WHERE_WIZARD, needsRestart = False, fnc=(0, VideoWizard)))
 	return list
