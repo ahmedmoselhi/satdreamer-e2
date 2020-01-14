@@ -7,7 +7,7 @@ class HardwareInfo:
 	device_model = None
 	device_version = ""
 	device_revision = ""
-	device_hdmi = False
+	device_hdmi = True
 
 	def __init__(self):
 		global hw_info
@@ -35,39 +35,18 @@ class HardwareInfo:
 			pass
 
 		# Model
-		for line in open((resolveFilename(SCOPE_SKIN, 'hw_info/hw_info.cfg')), 'r'):
-			if not line.startswith('#') and not line.isspace():
-				l = line.strip().replace('\t', ' ')
-				if ' ' in l:
-					infoFname, prefix = l.split()
-				else:
-					infoFname = l
-					prefix = ""
-				try:
-					self.device_model = prefix + open("/proc/stb/info/" + infoFname).read().strip()
-					break
-				except:
-					pass
+		try:
+			self.device_model = open("/proc/stb/info/boxtype").read().strip()
+		except:
+			pass
 
 		self.device_model = self.device_model or self.device_name
 
-		# map for Xtrend device models to machine names
-		if self.device_model.startswith(("et9", "et4", "et5", "et6", "et7")):
-			self.machine_name = "%sx00" % self.device_model[:3]
-		elif self.device_model == "et11000":
-			self.machine_name = "et1x000"
-		else:
-			self.machine_name = self.device_model
+		self.machine_name = self.device_model
 
-		if self.device_revision:
-			self.device_string = "%s (%s-%s)" % (self.device_model, self.device_revision, self.device_version)
-		elif self.device_version:
-			self.device_string = "%s (%s)" % (self.device_model, self.device_version)
-		else:
-			self.device_string = self.device_model
+		self.device_string = self.device_model
 
-		# only some early DMM boxes do not have HDMI hardware
-		self.device_hdmi =  self.device_model not in ("dm800", "dm8000")
+		self.device_hdmi =  self.device_model
 
 		print "Detected: " + self.get_device_string()
 
