@@ -239,6 +239,7 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Usage Setup"), "Setup/usage", "Setup"))
 	hotkey.functions.append((_("User interface"), "Setup/userinterface", "Setup"))
 	hotkey.functions.append((_("Recording Setup"), "Setup/recording", "Setup"))
+	hotkey.functions.append((_("Skin setup"), "Module/Screens.SkinSelector/SkinSelector", "Setup"))
 	hotkey.functions.append((_("Harddisk Setup"), "Setup/harddisk", "Setup"))
 	hotkey.functions.append((_("Subtitles Settings"), "Setup/subtitlesetup", "Setup"))
 	hotkey.functions.append((_("Language"), "Module/Screens.LanguageSelection/LanguageSelection", "Setup"))
