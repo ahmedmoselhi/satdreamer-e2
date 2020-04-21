@@ -78,13 +78,11 @@ AC_DEFUN([AX_PYTHON_DEVEL],[
 		version to use, for example '2.3'. This string
 		will be appended to the Python interpreter
 		canonical name.])
-
 	AC_PATH_PROG([PYTHON],[python[$PYTHON_VERSION]])
 	if test -z "$PYTHON"; then
 	   AC_MSG_ERROR([Cannot find python$PYTHON_VERSION in your system path])
 	   PYTHON_VERSION=""
 	fi
-
 	#
 	# Check for a version of Python >= 2.1.0
 	#
@@ -110,7 +108,6 @@ to something else than an empty string.
 	else
 		AC_MSG_RESULT([yes])
 	fi
-
 	#
 	# if the macro parameter ``version'' is set, honour it
 	#
@@ -131,7 +128,6 @@ variable to configure. See ``configure --help'' for reference.
 			PYTHON_VERSION=""
 		fi
 	fi
-
 	#
 	# Check if you have distutils, else fail
 	#
@@ -146,7 +142,6 @@ Please check your Python installation. The error was:
 $ac_distutils_result])
 		PYTHON_VERSION=""
 	fi
-
 	#
 	# Check for Python include path
 	#
@@ -158,16 +153,15 @@ $ac_distutils_result])
 			print (distutils.sysconfig.get_python_inc (plat_specific=1));"`
 		if test -n "${python_path}"; then
 			if test "${plat_python_path}" != "${python_path}"; then
-				python_path="-I$PY_PATH/include/python$PYTHON_VER_MAJOR -I$plat_python_path"
+				python_path="-I$python_path -I$plat_python_path"
 			else
-				python_path="-I$PY_PATH/include/python$PYTHON_VER_MAJOR"
+				python_path="-I$python_path"
 			fi
 		fi
 		PYTHON_CPPFLAGS=$python_path
 	fi
 	AC_MSG_RESULT([$PYTHON_CPPFLAGS])
 	AC_SUBST([PYTHON_CPPFLAGS])
-
 	#
 	# Check for Python library path
 	#
@@ -176,7 +170,6 @@ $ac_distutils_result])
 		# (makes two attempts to ensure we've got a version number
 		# from the interpreter)
 		ac_python_version=`cat<<EOD | $PYTHON -
-
 # join all versioning strings, on some systems
 # major/minor numbers could be in different list elements
 from distutils.sysconfig import *
@@ -184,7 +177,6 @@ e = get_config_var('VERSION')
 if e is not None:
 	print(e)
 EOD`
-
 		if test -z "$ac_python_version"; then
 			if test -n "$PYTHON_VERSION"; then
 				ac_python_version=$PYTHON_VERSION
@@ -193,24 +185,19 @@ EOD`
 					print (sys.version[[:3]])"`
 			fi
 		fi
-
 		# Make the versioning information available to the compiler
 		AC_DEFINE_UNQUOTED([HAVE_PYTHON], ["$ac_python_version"],
                                    [If available, contains the Python version number currently in use.])
-
 		# First, the library directory:
 		ac_python_libdir=`cat<<EOD | $PYTHON -
-
 # There should be only one
 import distutils.sysconfig
 e = distutils.sysconfig.get_config_var('LIBDIR')
 if e is not None:
 	print (e)
 EOD`
-
 		# Now, for the library:
 		ac_python_library=`cat<<EOD | $PYTHON -
-
 import distutils.sysconfig
 c = distutils.sysconfig.get_config_vars()
 if 'LDVERSION' in c:
@@ -218,7 +205,6 @@ if 'LDVERSION' in c:
 else:
 	print ('python'+c[['VERSION']])
 EOD`
-
 		# This small piece shamelessly adapted from PostgreSQL python macro;
 		# credits goes to momjian, I think. I'd like to put the right name
 		# in the credits, if someone can point me in the right direction... ?
@@ -234,10 +220,8 @@ EOD`
 			  "from distutils.sysconfig import get_python_lib as f; \
 			  import os; \
 			  print (os.path.join(f(plat_specific=1, standard_lib=1), 'config'));"`
-#			PYTHON_LIBS="-L$ac_python_libdir -lpython$ac_python_version"
-			PYTHON_LIBS="-L$PY_PATH/lib/python$PYTHON_VER_MAJOR -lpython$ac_python_version"
+			PYTHON_LIBS="-L$ac_python_libdir -lpython$ac_python_version"
 		fi
-
 		if test -z "PYTHON_LIBS"; then
 			AC_MSG_ERROR([
   Cannot determine location of your Python DSO. Please check it was installed with
@@ -247,19 +231,16 @@ EOD`
 	fi
 	AC_MSG_RESULT([$PYTHON_LIBS])
 	AC_SUBST([PYTHON_LIBS])
-
 	#
 	# Check for site packages
 	#
 	AC_MSG_CHECKING([for Python site-packages path])
 	if test -z "$PYTHON_SITE_PKG"; then
-		PYTHON_SITE_PKG="$PY_PATH/lib/python$PYTHON_VER_MAJOR/site-packages"
-#		PYTHON_SITE_PKG=`$PYTHON -c "import distutils.sysconfig; \
-#			print (distutils.sysconfig.get_python_lib(0,0));"`
+		PYTHON_SITE_PKG=`$PYTHON -c "import distutils.sysconfig; \
+			print (distutils.sysconfig.get_python_lib(0,0));"`
 	fi
 	AC_MSG_RESULT([$PYTHON_SITE_PKG])
 	AC_SUBST([PYTHON_SITE_PKG])
-
 	#
 	# libraries which must be linked in when embedding
 	#
@@ -271,7 +252,6 @@ EOD`
 	fi
 	AC_MSG_RESULT([$PYTHON_EXTRA_LIBS])
 	AC_SUBST(PYTHON_EXTRA_LIBS)
-
 	#
 	# linking flags needed when embedding
 	#
@@ -283,7 +263,6 @@ EOD`
 	fi
 	AC_MSG_RESULT([$PYTHON_EXTRA_LDFLAGS])
 	AC_SUBST(PYTHON_EXTRA_LDFLAGS)
-
 	#
 	# final check to see if everything compiles alright
 	#
@@ -305,9 +284,7 @@ EOD`
 	CPPFLAGS="$ac_save_CPPFLAGS"
 	LIBS="$ac_save_LIBS"
 	LDFLAGS="$ac_save_LDFLAGS"
-
 	AC_MSG_RESULT([$pythonexists])
-
         if test ! "x$pythonexists" = "xyes"; then
 	   AC_MSG_FAILURE([
   Could not link test program to Python. Maybe the main Python library has been
@@ -322,7 +299,6 @@ EOD`
 	   ])
 	  PYTHON_VERSION=""
 	fi
-
 	#
 	# all done!
 	#
