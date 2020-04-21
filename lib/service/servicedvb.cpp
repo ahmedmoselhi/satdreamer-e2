@@ -646,9 +646,8 @@ eServiceFactoryDVB::eServiceFactoryDVB()
 	if (sc)
 	{
 		std::list<std::string> extensions;
-#if defined(__sh__) //Topfield original recording extension
+//Topfield original recording extension
 		extensions.push_back("rec");
-#endif
 		extensions.push_back("ts");
 		extensions.push_back("trp");
 		sc->addServiceFactory(eServiceFactoryDVB::id, this, extensions);
@@ -1216,7 +1215,8 @@ void eDVBServicePlay::serviceEvent(int event)
 		break;
 	}
 	case eDVBServicePMTHandler::eventPreStart:
-		loadCuesheet();
+		if (!m_is_stream)
+			 loadCuesheet();
 		break;
 	case eDVBServicePMTHandler::eventEOF:
 		m_event((iPlayableService*)this, evEOF);
@@ -1369,6 +1369,8 @@ RESULT eDVBServicePlay::start()
 			scrambled = true;
 
 		type = eDVBServicePMTHandler::streamclient;
+		//will skip on calling findPMT() for streams, as it is not needed
+		service.setServiceID(eServiceFactoryDVB::id);
 	}
 
 	m_first_program_info = 1;
@@ -1740,9 +1742,9 @@ RESULT eDVBServicePlay::timeshift(ePtr<iTimeshiftService> &ptr)
 				return -2;
 			}
 
-			if (((off_t)fs.f_bavail) * ((off_t)fs.f_bsize) < 200*1024*1024LL)
+			if (((off_t)fs.f_bavail) * ((off_t)fs.f_bsize) < 1024 * 1024 * 1024LL)
 			{
-				eDebug("[eDVBServicePlay] timeshift not enough diskspace for timeshift! (less than 200MB)");
+				eDebug("[eDVBServicePlay] timeshift: not enough diskspace for timeshift! (less than 1 GB)");
 				return -3;
 			}
 		}

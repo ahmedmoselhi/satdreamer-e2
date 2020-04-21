@@ -2,7 +2,7 @@ from Components.config import config, ConfigSelection, ConfigSubDict, ConfigYesN
 from Components.SystemInfo import SystemInfo
 from Tools.CList import CList
 from Tools.HardwareInfo import HardwareInfo
-from os import path
+import os
 
 # The "VideoHardware" is the interface to /proc/stb/video.
 # It generates hotplug events, and gives you the list of
@@ -23,26 +23,20 @@ class VideoHardware:
 	rates["576p"] =			{ "50Hz":	{ 50: "576p50" } }
 
 	rates["720p"] =			{ "50Hz":	{ 50: "720p50" },
-								"60Hz":	{ 60: "720p60" } }
+					  "60Hz":	{ 60: "720p60" } }
 
 	rates["1080i"] =		{ "50Hz":	{ 50: "1080i50" },
-								"60Hz":	{ 60: "1080i60" } }
+					  "60Hz":	{ 60: "1080i60" } }
 
 	rates["1080p"] =		{ "23Hz":	{ 50: "1080p23" },
-								"24Hz":	{ 60: "1080p24" },
-								"25Hz":	{ 60: "1080p25" },
-								"29Hz":	{ 60: "1080p29" },
-								"30Hz":	{ 60: "1080p30" },
-								"50Hz":	{ 60: "1080p50" } }
+					  "24Hz":	{ 60: "1080p24" },
+					  "25Hz":	{ 60: "1080p25" },
+					  "29Hz":	{ 60: "1080p29" },
+					  "30Hz":	{ 60: "1080p30" },
+					  "50Hz":	{ 60: "1080p50" },
+					  "60Hz":	{ 60: "1080p60" } }
 
-	rates["2160p30"] =		{ "25Hz":	{ 50: "2160p25" },
-								"30Hz":		{ 60: "2160p30"} }
-
-	rates["2160p"] =		{ "50Hz":	{ 50: "2160p50" },
-								"60Hz":		{ 60: "2160p" },
-								"multi":	{ 50: "2160p50", 60: "2160p" } }
-
-	rates["PC"] = { 
+	rates["PC"] = {
 		"1024x768"  : { 60: "1024x768_60", 70: "1024x768_70", 75: "1024x768_75", 90: "1024x768_90", 100: "1024x768_100" }, #43 60 70 72 75 90 100
 		"1280x1024" : { 60: "1280x1024_60", 70: "1280x1024_70", 75: "1280x1024_75" }, #43 47 60 70 74 75
 		"1600x1200" : { 60: "1600x1200_60" }, #60 66 76
@@ -50,11 +44,13 @@ class VideoHardware:
 
 	if SystemInfo["HasScart"]:
 		modes["Scart"] = ["PAL"]
-	elif SystemInfo["HasComposite"]:
-		modes["RSA"] = ["576i", "PAL", "NTSC", "Multi"]
-        if SystemInfo["HasYPbPr"]:
-		modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
-	modes["Component"] = ["720p", "1080p", "1080i", "576p", "576i"]
+#	elif SystemInfo["HasComposite"]:
+#		modes["RCA"] = ["576i", "PAL", "NTSC", "Multi"]
+	if SystemInfo["HasYPbPr"]:
+		modes["Component"] = ["720p", "1080p", "1080i", "576p", "576i"]
+#	if SystemInfo["Has2160p"]:
+#		modes["DVI"] = ["720p", "1080p", "2160p", "1080i", "576p", "480p", "576i", "480i"]
+#	else:
 	modes["HDMI"] = ["720p", "1080p", "1080i", "576p", "576i"]
 	modes["HDMI-PC"] = ["PC"]
 
@@ -94,12 +90,12 @@ class VideoHardware:
 
 		self.readAvailableModes()
 		self.readPreferredModes()
-		self.widescreen_modes = set(["576i", "576p", "720p", "1080i", "1080p", "2160p"]).intersection(*[self.modes_available])
+		self.widescreen_modes = set(["576i", "576p", "720p", "1080i", "1080p"]).intersection(*[self.modes_available])
 
-		if self.modes.has_key("DVI-PC") and not self.getModeList("DVI-PC"):
+		if "DVI-PC" in self.modes and not self.getModeList("DVI-PC"):
 			print "[VideoHardware] remove DVI-PC because of not existing modes"
 			del self.modes["DVI-PC"]
-		if self.modes.has_key("Scart") and not self.getModeList("Scart"):
+		if "Scart" in self.modes and not self.getModeList("Scart"):
 			print "[VideoHardware] remove Scart because of not existing modes"
 			del self.modes["Scart"]
 
@@ -144,23 +140,22 @@ class VideoHardware:
 			except IOError:
 				print "[VideoHardware] reading preferred modes failed, using all video modes"
 				self.modes_preferred = self.modes_available
- 
+
 			if len(self.modes_preferred) <= 1:
 				self.modes_preferred = self.modes_available
-				print "[VideoHardware] reading preferred modes is empty, using all video modes" 
+				print "[VideoHardware] reading preferred modes is empty, using all video modes"
 		else:
 			self.modes_preferred = self.modes_available
 			print "[VideoHardware] reading preferred modes override, using all video modes"
 
 		self.last_modes_preferred = self.modes_preferred
- 
+
 	# check if a high-level mode with a given rate is available.
 	def isModeAvailable(self, port, mode, rate):
 		rate = self.rates[mode][rate]
 		for mode in rate.values():
 			if port == "HDMI-PC":
-				if mode not in self.modes_preferred:
-					return False
+				return True
 			else:
 				if mode not in self.modes_available:
 					return False
@@ -178,10 +173,16 @@ class VideoHardware:
 
 		mode_50 = modes.get(50)
 		mode_60 = modes.get(60)
+		mode_24 = modes.get(24)
+
 		if mode_50 is None or force == 60:
 			mode_50 = mode_60
 		if mode_60 is None or force == 50:
 			mode_60 = mode_50
+		if mode_24 is None or force:
+			mode_24 = mode_60
+			if force == 50:
+				mode_24 = mode_50
 
 		try:
 			open("/proc/stb/video/videomode_50hz", "w").write(mode_50)
@@ -203,8 +204,7 @@ class VideoHardware:
 				open("/proc/stb/video/videomode_24hz", "w").write(mode_24)
 			except IOError:
 				print "[VideoHardware] cannot open /proc/stb/video/videomode_24hz"
-
-		#call setResolution() with -1,-1 to read the new scrren dimesions without changing the framebuffer resolution
+		#call setResolution() with -1,-1 to read the new screen dimensions without changing the framebuffer resolution
 		from enigma import gMainDC
 		gMainDC.getInstance().setResolution(-1, -1)
 
@@ -272,7 +272,14 @@ class VideoHardware:
 			if len(modes):
 				config.av.videomode[port] = ConfigSelection(choices = [mode for (mode, rates) in modes])
 			for (mode, rates) in modes:
-				config.av.videorate[mode] = ConfigSelection(choices = rates)
+				ratelist = []
+				for rate in rates:
+					if rate in ("auto"):
+						if SystemInfo["Has24hz"]:
+							ratelist.append((rate, rate))
+					else:
+						ratelist.append((rate, rate))
+				config.av.videorate[mode] = ConfigSelection(choices = ratelist)
 		config.av.videoport = ConfigSelection(choices = lst)
 
 	def setConfiguredMode(self):
@@ -328,7 +335,7 @@ class VideoHardware:
 				aspect = "16:9"
 			else:
 				aspect = {"16_9": "16:9", "16_10": "16:10"}[config.av.aspect.value]
-			policy_choices = {"pillarbox": "panscan", "panscan": "letterbox", "nonlinear": "nonlinear", "scale": "bestfit", "full": "full", "auto": "auto"}
+			policy_choices = {"pillarbox": "letterbox", "panscan": "panscan", "nonlinear": "nonlinear", "scale": "bestfit", "auto": "bestfit"}
 			policy = policy_choices[config.av.policy_43.value]
 			policy2_choices = {"letterbox": "letterbox", "panscan": "panscan", "scale": "bestfit", "full": "full", "auto": "auto"}
 			policy2 = policy2_choices[config.av.policy_169.value]

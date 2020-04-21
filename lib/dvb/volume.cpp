@@ -45,12 +45,11 @@ eDVBVolumecontrol::eDVBVolumecontrol()
 	openMixer();
 #endif
 	volumeUnMute();
-#if not defined (__sh__) // dont reset volume on start
+#if not defined(__sh__) // do not reset volume on start
 	setVolume(100, 100);
 #endif
 }
 
-#if not defined(__sh__)
 int eDVBVolumecontrol::openMixer()
 {
 #ifdef HAVE_ALSA
@@ -104,7 +103,6 @@ int eDVBVolumecontrol::openMixer()
 	return open( AUDIO_DEV, O_RDWR );
 #endif
 }
-#endif
 
 void eDVBVolumecontrol::closeMixer(int fd)
 {
@@ -155,7 +153,6 @@ void eDVBVolumecontrol::setVolume(int left, int right)
 	right = 63 - rightVol * 63 / 100;
 		/* now range is 63..0, where 0 is loudest */
 
-#if not defined(__sh__)
 	audio_mixer_t mixer;
 
 	mixer.volume_left = left;
@@ -177,7 +174,6 @@ void eDVBVolumecontrol::setVolume(int left, int right)
 	else {
 		eDebug("[eDVBVolumecontrol] SetVolume failed to open mixer: %m");
 	}
-#endif
 
 	//HACK?
 	CFile::writeInt("/proc/stb/avs/0/volume", left); /* in -1dB */
@@ -203,7 +199,6 @@ void eDVBVolumecontrol::volumeMute()
 		snd_mixer_selem_set_playback_volume_all(mainVolume, 0);
 	muted = true;
 #else
-#if not defined(__sh__)
 	int fd = openMixer();
 	if (fd >= 0)
 	{
@@ -212,7 +207,6 @@ void eDVBVolumecontrol::volumeMute()
 #endif
 		closeMixer(fd);
 	}
-#endif
 	muted = true;
 
 	//HACK?
@@ -228,7 +222,6 @@ void eDVBVolumecontrol::volumeUnMute()
 		snd_mixer_selem_set_playback_volume_all(mainVolume, leftVol);
 	muted = false;
 #else
-#if not defined(__sh__)
 	int fd = openMixer();
 	if (fd >= 0)
 	{
@@ -237,7 +230,6 @@ void eDVBVolumecontrol::volumeUnMute()
 #endif
 		closeMixer(fd);
 	}
-#endif
 	muted = false;
 
 	//HACK?
