@@ -46,7 +46,8 @@ enigma2_LDADD = \
 	@AVAHI_LIBS@ \
 	@LIBDL_LIBS@ \
 	-ltuxtxt32bpp
-
+	-lpthread -lresolv -lmmeimage
+	
 enigma2_LDFLAGS = -Wl,--export-dynamic
 
 if HAVE_GIT_DIR
