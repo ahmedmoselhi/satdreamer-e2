@@ -114,15 +114,14 @@ eDVBResourceManager::eDVBResourceManager()
 
 	m_fbcmng = new eFBCTunerManager(instance);
 
-#if defined(__sh__)
-		/*
-		 * this is a strange hack: the drivers seem to only work correctly after
-		 * demux0 has been used once. After that, we can use demux1,2,...
-		 */
+	/*
+	 * this is a strange hack: the drivers seem to only work correctly after
+	 * demux0 has been used once. After that, we can use demux1,2,...
+	 */
 	initDemux(0);
-		/* for pip demux1 also be used once */
+	/* for pip demux1 also be used once */
 	initDemux(1);
-#endif
+
 	CONNECT(m_releaseCachedChannelTimer->timeout, eDVBResourceManager::releaseCachedChannel);
 }
 
@@ -133,7 +132,7 @@ void eDVBResourceManager::initDemux(int num_demux)
 	int dmx = open(filename, O_RDWR | O_CLOEXEC);
 	if (dmx < 0)
 	{
-		eDebug("can't open %s (%m)", filename);
+		eDebug("cannot open %s (%m)", filename);
 	}
 	else
 	{
@@ -349,21 +348,6 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 		frontend = -1;
 		goto error;
 	}
-
-#if !defined(__sh__)
-	struct dtv_properties props;
-	struct dtv_property prop[1];
-
-	prop[0].cmd = DTV_ENUM_DELSYS;
-	memset(prop[0].u.buffer.data, 0, sizeof(prop[0].u.buffer.data));
-	prop[0].u.buffer.len = 0;
-	props.num = 1;
-	props.props = prop;
-
-	if (ioctl(frontend, FE_GET_PROPERTY, &props) < 0)
-		eDebug("[eDVBUsbAdapter] FE_GET_PROPERTY DTV_ENUM_DELSYS failed %m");
-#endif
-
 	::close(frontend);
 	frontend = -1;
 
@@ -452,10 +436,6 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 	ioctl(vtunerFd, VTUNER_SET_NAME, name);
 	ioctl(vtunerFd, VTUNER_SET_TYPE, type);
 	ioctl(vtunerFd, VTUNER_SET_FE_INFO, &fe_info);
-#if !defined(__sh__)
-	if (prop[0].u.buffer.len > 0)
-		ioctl(vtunerFd, VTUNER_SET_DELSYS, prop[0].u.buffer.data);
-#endif
 	ioctl(vtunerFd, VTUNER_SET_HAS_OUTPUTS, "no");
 	ioctl(vtunerFd, VTUNER_SET_ADAPTER, nr);
 
@@ -1009,6 +989,7 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 	ePtr<eDVBRegisteredDemux> unused;
 	uint8_t d, a;
 
+#if 1
 	/*
 	 * For pvr playback, start with the last demux.
 	 * On some hardware, there are less ca devices than demuxes, so try to leave
@@ -1056,15 +1037,61 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 			--i;
 		}
 	}
-
+#else
+// we use our own algo for demux detection
+	int n = 0;
+	for (; i != m_demux.end(); ++i, ++n)
+	{
+		if (fe)
+ 		{
+ 			if (!i->m_inuse)
+ 			{
+ 				if (!unused)
+				{
+					// take the first unused
+					//eDebug("\nallocate demux b = %d\n",n);
+ 					unused = i;
+				}
+			}
+			else if (i->m_adapter == fe->m_adapter && i->m_demux->getSource() == fe->m_frontend->getDVBID())
+			{
+				// take the demux allocated to the same
+				// frontend, just create a new reference
+				demux = new eDVBAllocatedDemux(i);
+				//eDebug("\nallocate demux b = %d\n",n);
+				return 0;
+			}
+		}
+		else if (n == ((int)m_demux.size() - 1))
+		{
+			// Always use the last demux for PVR
+			// it is assumed that the last demux is not
+			// attached to a frontend. That is, there
+			// should be one instance of dvr & demux
+			// devices more than of frontend devices.
+			// Otherwise, playback and timeshift might
+			// interfere recording.
+			if (i->m_inuse)
+			{
+				// just create a new reference
+				demux = new eDVBAllocatedDemux(i);
+				//eDebug("\nallocate demux c = %d\n",n);
+				return 0;
+			}
+			unused = i;
+			//eDebug("\nallocate demux d = %d\n", n);
+			break;
+		}
+	}
+#endif
 	if (unused)
 	{
 		unused->m_demux->getCAAdapterID(a);
 		unused->m_demux->getCADemuxID(d);
-		eDebug("[eDVBResourceManager] allocating demux adapter=%d, demux=%d, source=%d fesource=%d", a, d, unused->m_demux->getSource(), fesource);
+		eDebug("[eDVBResourceManager] allocating demux adapter=%d, demux=%d, source=%d fesource=%d", a, d, unused->m_demux->getSource(), fe ? fe->m_frontend->getDVBID() : -1);
 		demux = new eDVBAllocatedDemux(unused);
 		if (fe)
-			demux->get().setSourceFrontend(fesource);
+			demux->get().setSourceFrontend(fe->m_frontend->getDVBID());
 		else
 			demux->get().setSourcePVR(0);
 		return 0;
@@ -2186,28 +2213,11 @@ RESULT eDVBChannel::playSource(ePtr<iTsSource> &source, const char *streaminfo_f
 
 	if (m_pvr_fd_dst < 0)
 	{
-#if defined(__sh__) // our pvr device is called dvr
+// our pvr device is called dvr
 		char dvrDev[128];
 		int dvrIndex = m_mgr->m_adapter.begin()->getNumDemux() - 1;
 		sprintf(dvrDev, "/dev/dvb/adapter0/dvr%d", dvrIndex);
 		m_pvr_fd_dst = open(dvrDev, O_WRONLY);
-#else
-		ePtr<eDVBAllocatedDemux> &demux = m_demux ? m_demux : m_decoder_demux;
-		if (demux)
-		{
-			m_pvr_fd_dst = demux->get().openDVR(O_WRONLY);
-			if (m_pvr_fd_dst < 0)
-			{
-				eDebug("[eDVBChannel] can't open /dev/dvb/adapterX/dvrX: %m");
-				return -ENODEV;
-			}
-		}
-		else
-		{
-			eDebug("[eDVBChannel] no demux allocated yet.. so its not possible to open the dvr device!!");
-			return -ENODEV;
-		}
-#endif
 	}
 
 	m_pvr_thread = new eDVBChannelFilePush(m_source->getPacketSize());

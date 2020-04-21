@@ -158,9 +158,9 @@ $ac_distutils_result])
 			print (distutils.sysconfig.get_python_inc (plat_specific=1));"`
 		if test -n "${python_path}"; then
 			if test "${plat_python_path}" != "${python_path}"; then
-				python_path="-I$python_path -I$plat_python_path"
+				python_path="-I$PY_PATH/include/python$PYTHON_VER_MAJOR -I$plat_python_path"
 			else
-				python_path="-I$python_path"
+				python_path="-I$PY_PATH/include/python$PYTHON_VER_MAJOR"
 			fi
 		fi
 		PYTHON_CPPFLAGS=$python_path
@@ -234,7 +234,8 @@ EOD`
 			  "from distutils.sysconfig import get_python_lib as f; \
 			  import os; \
 			  print (os.path.join(f(plat_specific=1, standard_lib=1), 'config'));"`
-			PYTHON_LIBS="-L$ac_python_libdir -lpython$ac_python_version"
+#			PYTHON_LIBS="-L$ac_python_libdir -lpython$ac_python_version"
+			PYTHON_LIBS="-L$PY_PATH/lib/python$PYTHON_VER_MAJOR -lpython$ac_python_version"
 		fi
 
 		if test -z "PYTHON_LIBS"; then
@@ -252,8 +253,9 @@ EOD`
 	#
 	AC_MSG_CHECKING([for Python site-packages path])
 	if test -z "$PYTHON_SITE_PKG"; then
-		PYTHON_SITE_PKG=`$PYTHON -c "import distutils.sysconfig; \
-			print (distutils.sysconfig.get_python_lib(0,0));"`
+		PYTHON_SITE_PKG="$PY_PATH/lib/python$PYTHON_VER_MAJOR/site-packages"
+#		PYTHON_SITE_PKG=`$PYTHON -c "import distutils.sysconfig; \
+#			print (distutils.sysconfig.get_python_lib(0,0));"`
 	fi
 	AC_MSG_RESULT([$PYTHON_SITE_PKG])
 	AC_SUBST([PYTHON_SITE_PKG])

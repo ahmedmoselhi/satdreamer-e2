@@ -290,7 +290,7 @@ def InitUsageConfig():
 
 	config.misc.disable_background_scan = ConfigYesNo(default = False)
 	config.misc.use_ci_assignment = ConfigYesNo(default = False)
-	config.usage.show_event_progress_in_servicelist = ConfigSelection(default = 'barright', choices = [
+	config.usage.show_event_progress_in_servicelist = ConfigSelection(default = 'barleft', choices = [
 		('barleft', _("Progress bar left")),
 		('barright', _("Progress bar right")),
 		('percleft', _("Percentage left")),

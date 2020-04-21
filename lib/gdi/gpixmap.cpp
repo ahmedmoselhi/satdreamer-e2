@@ -186,7 +186,6 @@ static inline void added_pixmap(int size) {}
 static inline void removed_pixmap(int size) {}
 #endif
 
-#if not defined(__sh__)
 static bool is_a_candidate_for_accel(const gUnmanagedSurface* surface)
 {
 	if (surface->stride < 48)
@@ -195,26 +194,17 @@ static bool is_a_candidate_for_accel(const gUnmanagedSurface* surface)
 	{
 		case 8:
 		case 32:
-		{
 			return (surface->y * surface->stride) >= GFX_SURFACE_ACCELERATION_THRESHOLD;
-		}
 		default:
-		{
 			return false;
-		}
 	}
 }
-#endif
 
 gSurface::gSurface(int width, int height, int _bpp, int accel):
 	gUnmanagedSurface(width, height, _bpp)
 {
-#if defined(__sh__)
-	if (accel)
-#else
 	if ((accel > gPixmap::accelAuto) ||
 		((accel == gPixmap::accelAuto) && (is_a_candidate_for_accel(this))))
-#endif
 	{
 		if (gAccel::getInstance()->accelAlloc(this) != 0)
 				eDebug("[gSurface] ERROR: accelAlloc failed");
@@ -256,7 +246,7 @@ void gPixmap::fill(const gRegion &region, const gColor &color)
 			for (int y=area.top(); y<area.bottom(); y++)
 		 		memset(((__u8 *)surface->data) + y * surface->stride + area.left(), color.color, area.width());
 		}
-		else if (surface->bpp == 16)
+	 else if (surface->bpp == 16)
 		{
 			uint32_t icol;
 
@@ -345,7 +335,11 @@ void gPixmap::fill(const gRegion &region, const gRGB &color)
 			uint32_t col;
 
 			col = color.argb();
-			col^=0xFF000000;
+			if ((col & 0xFF000000) == 0xFF000000)
+			{
+				col = 0xFF000000;
+			}
+			col ^= 0xFF000000;
 
 #ifdef GPIXMAP_DEBUG
 			Stopwatch s;

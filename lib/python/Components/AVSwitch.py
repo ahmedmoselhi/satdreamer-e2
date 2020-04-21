@@ -79,11 +79,11 @@ def InitAVSwitch():
 	config.av.colorformat = ConfigSelection(choices=colorformat_choices, default="cvbs")
 	config.av.aspectratio = ConfigSelection(choices={
 			"4_3_letterbox": _("4:3 Letterbox"),
-			"4_3_panscan": _("4:3 PanScan"),
+			"4_3_panscan": _("4:3 Zoom"),
 			"16_9": _("16:9"),
 			"16_9_always": _("16:9 always"),
 			"16_10_letterbox": _("16:10 Letterbox"),
-			"16_10_panscan": _("16:10 PanScan"),
+			"16_10_panscan": _("16:10 Zoom"),
 			"16_9_letterbox": _("16:9 Letterbox")},
 			default = "16_9")
 	config.av.aspect = ConfigSelection(choices={
@@ -95,10 +95,10 @@ def InitAVSwitch():
 	policy2_choices = {
 	# TRANSLATORS: (aspect ratio policy: black bars on top/bottom) in doubt, keep english term.
 	"letterbox": _("Letterbox"),
-	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
-	"panscan": _("Pan&scan"),
+	# TRANSLATORS: (aspect ratio policy: cropped content on top/bottom) in doubt, keep english term
+	"panscan": _("Zoom"),
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
-	"scale": _("Just scale")}
+	"scale": _("Stretch")}
 	try:
 		if "full" in open("/proc/stb/video/policy2_choices").read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
@@ -116,13 +116,13 @@ def InitAVSwitch():
 	# TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
 	"pillarbox": _("Pillarbox"),
 	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
-	"panscan": _("Pan&scan"),
+	"panscan": _("Zoom"),
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
-	"scale": _("Just scale")}
+	"nonlinear": _("Stretch")}
 	try:
 		if "nonlinear" in open("/proc/stb/video/policy_choices").read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
-			policy_choices.update({"nonlinear": _("Nonlinear")})
+			policy_choices.update({"nonlinear": _("Panoramic")})
 	except:
 		pass
 	try:
@@ -138,8 +138,8 @@ def InitAVSwitch():
 	except:
 		pass
 	config.av.policy_43 = ConfigSelection(choices=policy_choices, default = "pillarbox")
-	config.av.tvsystem = ConfigSelection(choices = {"pal": _("PAL"), "ntsc": _("NTSC"), "multinorm": _("multinorm")}, default="pal")
-	config.av.wss = ConfigEnableDisable(default = True)
+	config.av.tvsystem = ConfigSelection(choices = {"pal": _("PAL"), "ntsc": _("NTSC"), "multinorm": _("Multinorm")}, default="multinorm")
+	config.av.wss = ConfigEnableDisable(default = False)
 	config.av.generalAC3delay = ConfigSelectionNumber(-1000, 1000, 5, default = 0)
 	config.av.generalPCMdelay = ConfigSelectionNumber(-1000, 1000, 5, default = 0)
 	config.av.vcrswitch = ConfigEnableDisable(default = False)

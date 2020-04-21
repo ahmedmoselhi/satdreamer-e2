@@ -10,22 +10,20 @@
 #include <lib/base/nconfig.h>
 #include <lib/gdi/gmaindc.h>
 
-#if defined(__MIPSEL__)
-#include <asm/ptrace.h>
-#else
-#warning "no oops support!"
+//#warning "no oops support!"
 #define NO_OOPS_SUPPORT
-#endif
 
 #include "version_info.h"
 
 /************************************************/
 
+#if 0
 static const char *crash_emailaddr =
 #ifndef CRASH_EMAILADDR
 	"the OpenPLi forum";
 #else
 	CRASH_EMAILADDR;
+#endif
 #endif
 
 /* Defined in bsod.cpp */
@@ -105,7 +103,14 @@ void bsodFatal(const char *component)
 {
 	/* show no more than one bsod while shutting down/crashing */
 	if (bsodhandled)
+	{
+		if (component)
+		{
+			sleep(1);
+			raise(SIGKILL);
+		}
 		return;
+	}
 	bsodhandled = true;
 
 	if (!component)
@@ -172,7 +177,6 @@ void bsodFatal(const char *component)
 			component);
 
 		stringFromFile(f, "stbmodel", "/proc/stb/info/boxtype");
-		stringFromFile(f, "stbmodel", "/proc/stb/info/vumodel");
 		stringFromFile(f, "stbmodel", "/proc/stb/info/model");
 		stringFromFile(f, "kernelcmdline", "/proc/cmdline");
 		stringFromFile(f, "nimsockets", "/proc/bus/nim_sockets");
@@ -198,7 +202,7 @@ void bsodFatal(const char *component)
 	gPainter p(my_dc);
 	p.resetOffset();
 	p.resetClip(eRect(ePoint(0, 0), my_dc->size()));
-	p.setBackgroundColor(gRGB(0x008000));
+	p.setBackgroundColor(gRGB(0x000080));
 	p.setForegroundColor(gRGB(0xFFFFFF));
 
 	int hd =  my_dc->size().width() == 1920;
@@ -212,14 +216,14 @@ void bsodFatal(const char *component)
 	os.clear();
 	os << "We are really sorry. Your STB encountered "
 		"a software problem, and needs to be restarted.\n"
-		"Please send the logfile " << crashlog_name << " to " << crash_emailaddr << ".\n"
-		"Your STB restarts in 10 seconds!\n"
+		"Details have been logged in the logfile " << crashlog_name << ".\n"
+		"Your STB will restart in 30 seconds...\n"
 		"Component: " << component;
 
 	p.renderText(usable_area, os.str().c_str(), gPainter::RT_WRAP|gPainter::RT_HALIGN_LEFT);
 
 	std::string logtail;
-	int lines = 20;
+	int lines = 35;
 	
 	if (logp2)
 	{
@@ -263,12 +267,12 @@ void bsodFatal(const char *component)
 
 	if (!logtail.empty())
 	{
-		font = new gFont("Regular", hd ? 21 : 14);
+		font = new gFont("Regular", hd ? 14 : 10);
 		p.setFont(font);
 		usable_area = eRect(hd ? 30 : 100, hd ? 180 : 170, my_dc->size().width() - (hd ? 60 : 180), my_dc->size().height() - (hd ? 30 : 20));
 		p.renderText(usable_area, logtail, gPainter::RT_HALIGN_LEFT);
 	}
-	sleep(10);
+	sleep(30);
 
 	/*
 	 * When 'component' is NULL, we are called because of a python exception.

@@ -15,6 +15,10 @@ import xml.etree.cElementTree
 config.unicable = ConfigSubsection()
 
 def getConfigSatlist(orbpos, satlist):
+#+++>  CAUSE OF CRASH!
+	if not satlist:
+		return None
+#+++<
 	default_orbpos = None
 	for x in satlist:
 		if x[0] == orbpos:

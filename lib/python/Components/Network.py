@@ -61,7 +61,7 @@ class Network:
 		return [ int(n) for n in ip.split('.') ]
 
 	def getAddrInet(self, iface, callback):
-		cmd = ("/sbin/ip", "/sbin/ip", "-o", "addr", "show", "dev", iface)
+		cmd = ("/sbin/ip", "/sbin/ip", "addr", "show", "dev", iface)
 		self.console.ePopen(cmd, self.IPaddrFinished, [iface, callback])
 
 	def IPaddrFinished(self, result, retval, extra_args):
@@ -71,37 +71,45 @@ class Network:
 		ipRegexp = '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 		netRegexp = '[0-9]{1,2}'
 		macRegexp = '[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}\:[0-9a-fA-F]{2}'
-		ipLinePattern = re.compile('inet ' + ipRegexp + '/')
+		ipLinePattern = re.compile(ipRegexp + '/')
 		ipPattern = re.compile(ipRegexp)
 		netmaskLinePattern = re.compile('/' + netRegexp)
 		netmaskPattern = re.compile(netRegexp)
-		bcastLinePattern = re.compile(' brd ' + ipRegexp)
+		bcastLinePattern = re.compile('brd ' + ipRegexp)
 		upPattern = re.compile('UP')
 		macPattern = re.compile(macRegexp)
-		macLinePattern = re.compile('link/ether ' + macRegexp)
+		macLinePattern = re.compile(macRegexp)
 
 		for line in result.splitlines():
 			split = line.strip().split(' ',2)
 			if (split[1][:-1] == iface) or (split[1][:-1] == (iface + '@sys0')):
 				up = self.regExpMatch(upPattern, split[2])
-				mac = self.regExpMatch(macPattern, self.regExpMatch(macLinePattern, split[2]))
+#				print "[Network] up = ", up
 				if up is not None:
 					data['up'] = True
 					if iface is not 'lo':
 						self.configuredInterfaces.append(iface)
+			if (split[0] == 'link/ether'):
+				mac = self.regExpMatch(macPattern, self.regExpMatch(macLinePattern, split[1]))
 				if mac is not None:
+#					print "[Network] mac = ", mac
 					data['mac'] = mac
-			if split[1] == iface:
-				if re.search(globalIPpattern, split[2]):
-					ip = self.regExpMatch(ipPattern, self.regExpMatch(ipLinePattern, split[2]))
-					netmask = self.calc_netmask(self.regExpMatch(netmaskPattern, self.regExpMatch(netmaskLinePattern, split[2])))
-					bcast = self.regExpMatch(ipPattern, self.regExpMatch(bcastLinePattern, split[2]))
-					if ip is not None:
-						data['ip'] = self.convertIP(ip)
-					if netmask is not None:
-						data['netmask'] = self.convertIP(netmask)
-					if bcast is not None:
-						data['bcast'] = self.convertIP(bcast)
+			if (split[0] == 'inet'):
+				ip = self.regExpMatch(ipPattern, self.regExpMatch(ipLinePattern, split[1]))
+#				if ip is not None:
+#					print "[Network] ip = ", ip
+				netmask = self.calc_netmask(self.regExpMatch(netmaskPattern, self.regExpMatch(netmaskLinePattern, split[1])))
+#				if netmask is not None:
+#					print "[Network] netmask = ", netmask
+				bcast = self.regExpMatch(ipPattern, self.regExpMatch(bcastLinePattern, split[2]))
+#				if bcast is not None:
+#					print "[Network] bcast = ", bcast
+				if ip is not None:
+					data['ip'] = self.convertIP(ip)
+				if netmask is not None:
+					data['netmask'] = self.convertIP(netmask)
+				if bcast is not None:
+					data['bcast'] = self.convertIP(bcast)
 
 		if 'ip' not in data:
 			data['dhcp'] = True
@@ -568,16 +576,18 @@ class Network:
 			return True
 
 		# r871x_usb_drv on kernel 2.6.12 is not identifiable over /sys/class/net/'ifacename'/wireless so look also inside /proc/net/wireless
-		device = re.compile('[a-z]{2,}[0-9]*:')
-		ifnames = []
-		fp = open('/proc/net/wireless', 'r')
-		for line in fp:
-			try:
-				ifnames.append(device.search(line).group()[:-1])
-			except AttributeError:
-				pass
-		if iface in ifnames:
-			return True
+		if os.path.exists('/proc/net/wireless'):
+			device = re.compile('[a-z]{2,}[0-9]*:')
+			ifnames = []
+			fp = open('/proc/net/wireless', 'r')
+			for line in fp:
+				try:
+					ifnames.append(device.search(line).group()[:-1])
+				except AttributeError:
+					pass
+			fp.close()
+			if iface in ifnames:
+				return True
 
 		return False
 
