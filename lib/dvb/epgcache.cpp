@@ -2526,7 +2526,6 @@ void eEPGCache::channel_data::readData( const uint8_t *data, int source)
 {
 	int map;
 	iDVBSectionReader *reader = NULL;
-#ifdef __sh__
 /* Dagobert: this is still very hacky, but currently I cannot find
  * the origin of the readData call. I think the caller is
  * responsible for the unaligned data pointer in this call.
@@ -2545,12 +2544,11 @@ void eEPGCache::channel_data::readData( const uint8_t *data, int source)
 
 	if (isNotAligned)
 	{
-		/* see HILO macro and eit.h */
-		int len = ((data[1] & 0x0F) << 8 | data[2]) -1;
+		int len = ((data[1] & 0x0F) << 8 | data[2]) - 1;
 
 		/*eDebug("len %d %x, %x %x\n", len, len, data[1], data[2]);*/
 
-		if ( EIT_SIZE >= len )
+		if (EIT_SIZE >= len)
 			return;
 
 		aligned_data = (const __u8 *) malloc(len);
@@ -2564,7 +2562,6 @@ void eEPGCache::channel_data::readData( const uint8_t *data, int source)
 		memcpy((void *) aligned_data, (const __u8 *) data, len);
 		data = aligned_data;
 	}
-#endif
 	switch (source)
 	{
 		case NOWNEXT:

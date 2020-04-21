@@ -19,6 +19,10 @@
 #define I2C_SLAVE_FORCE	0x0706
 #endif
 
+#ifndef SYS_DVBC_ANNEX_A
+#define SYS_DVBC_ANNEX_A SYS_DVBC_ANNEX_AC
+#endif
+
 #define eDebugNoSimulate(x...) \
 	do { \
 		if (!m_simulate) \
@@ -942,12 +946,12 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)(snr / 32.768);
 	}
-	else if (!strcmp(m_description, "AVL2108")) // ET9000
+	else if (!strcmp(m_description, "AVL2108"))
 	{
 		ret = (int)(snr / 40.5);
 		sat_max = 1618;
 	}
-	if (!strcmp(m_description, "AVL6211")) // ET10000
+	else if (!strcmp(m_description, "AVL6211"))
 	{
 		ret = (int)(snr / 37.5);
 		sat_max = 1700;
@@ -1191,7 +1195,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		switch (parm.system)
 		{
 			case eDVBFrontendParametersTerrestrial::System_DVB_T:
-			case eDVBFrontendParametersTerrestrial::System_DVB_T2:
+			case eDVBFrontendParametersTerrestrial::System_DVB_T2: 
 			case eDVBFrontendParametersTerrestrial::System_DVB_T_T2: ret = (int)(snr / 58); ter_max = 1700; break;
 			default: break;
 		}

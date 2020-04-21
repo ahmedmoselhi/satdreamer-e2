@@ -9,6 +9,9 @@ class RemainingToText(Converter, object):
 	PROGRESS = 4
 	WITH_SECONDSPROGRESS = 5
 	ONLY_MINUTES = 6
+#+++>
+	FOLLOW = 7
+#+++<
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -24,6 +27,10 @@ class RemainingToText(Converter, object):
 			self.type = self.WITH_SECONDSPROGRESS
 		elif type == "OnlyMinutes":
 			self.type = self.ONLY_MINUTES
+#+++>
+		elif type == "FOLLOW":
+			self.type = self.FOLLOW
+#+++<
 		else:
 			self.type = self.DEFAULT
 
@@ -56,6 +63,13 @@ class RemainingToText(Converter, object):
 					return "%s%d:%02d" % (prefix, hours, minutes)
 				elif self.type == self.IN_SECONDS:
 					return prefix+str(tsecs)
+#+++>
+				elif self.type == self.FOLLOW:
+					if remaining is not None:
+						return "in %d min" % (remaining / 60)
+					else:
+						return "%d min" % (duration / 60)
+#+++<
 				elif self.type == self.DEFAULT or self.type == self.ONLY_MINUTES:
 					if remaining <= duration:
 						prefix = "+"

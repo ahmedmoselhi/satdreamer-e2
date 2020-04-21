@@ -192,14 +192,14 @@ int eListboxServiceContent::getPrevMarkerPos()
 	{
 		--i;
 		--index;
-		if (!(i->flags & eServiceReference::isMarker && !(i->flags & eServiceReference::isInvisible)))
+		if (! ((i->flags & eServiceReference::isMarker) && !(i->flags & eServiceReference::isInvisible)))
 			break;
 	}
 	while (index)
 	{
 		--i;
 		--index;
-		if (i->flags & eServiceReference::isMarker && !(i->flags & eServiceReference::isInvisible))
+		if ((i->flags & eServiceReference::isMarker) && !(i->flags & eServiceReference::isInvisible))
 			break;
 	}
 	return cursorResolve(index);
@@ -215,7 +215,7 @@ int eListboxServiceContent::getNextMarkerPos()
 	{
 		++i;
 		++index;
-		if (i->flags & eServiceReference::isMarker && !(i->flags & eServiceReference::isInvisible))
+		if ((i->flags & eServiceReference::isMarker) && !(i->flags & eServiceReference::isInvisible))
 			break;
 	}
 	return cursorResolve(index);

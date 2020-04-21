@@ -15,13 +15,8 @@
 // #define ACCEL_DEBUG
 
 gAccel *gAccel::instance;
-#if defined(__sh__)
 #define STMFB_ACCEL
-#else
-#define BCM_ACCEL
-#endif
 
-#ifdef STMFB_ACCEL
 extern int stmfb_accel_init(void);
 extern void stmfb_accel_close(void);
 extern void stmfb_accel_blit(
@@ -33,24 +28,6 @@ extern void stmfb_accel_fill(
 		int dst_addr, int dst_width, int dst_height, int dst_stride,
 		int x, int y, int width, int height,
 		unsigned long color);
-#endif
-#ifdef BCM_ACCEL
-extern int bcm_accel_init(void);
-extern void bcm_accel_close(void);
-extern void bcm_accel_blit(
-		int src_addr, int src_width, int src_height, int src_stride, int src_format,
-		int dst_addr, int dst_width, int dst_height, int dst_stride,
-		int src_x, int src_y, int width, int height,
-		int dst_x, int dst_y, int dwidth, int dheight,
-		int pal_addr, int flags);
-extern void bcm_accel_fill(
-		int dst_addr, int dst_width, int dst_height, int dst_stride,
-		int x, int y, int width, int height,
-		unsigned long color);
-extern bool bcm_accel_has_alphablending();
-extern int bcm_accel_accumulate();
-extern int bcm_accel_sync();
-#endif
 
 gAccel::gAccel():
 	m_accel_addr(0),
@@ -58,23 +35,12 @@ gAccel::gAccel():
 	m_accel_size(0)
 {
 	instance = this;
-
-#ifdef STMFB_ACCEL
 	stmfb_accel_init();
-#endif
-#ifdef BCM_ACCEL
-	m_bcm_accel_state = bcm_accel_init();
-#endif
 }
 
 gAccel::~gAccel()
 {
-#ifdef STMFB_ACCEL
 	stmfb_accel_close();
-#endif
-#ifdef BCM_ACCEL
-	bcm_accel_close();
-#endif
 	instance = 0;
 }
 
@@ -143,16 +109,11 @@ void gAccel::setAccelMemorySpace(void *addr, int phys_addr, int size)
 
 bool gAccel::hasAlphaBlendingSupport()
 {
-#ifdef BCM_ACCEL
-	return bcm_accel_has_alphablending();
-#else
 	return false;
-#endif
 }
 
 int gAccel::blit(gUnmanagedSurface *dst, gUnmanagedSurface *src, const eRect &p, const eRect &area, int flags)
 {
-#ifdef STMFB_ACCEL
 	int src_format = 0;
 	gUnmanagedSurface *surfaceTmp = new gUnmanagedSurface(area.width(), area.height(), dst->bpp);
 
@@ -230,44 +191,6 @@ int gAccel::blit(gUnmanagedSurface *dst, gUnmanagedSurface *src, const eRect &p,
 			p.x(), p.y(), p.width(), p.height());
 	}
 	return 0;
-#endif
-#ifdef BCM_ACCEL
-	if (!m_bcm_accel_state)
-	{
-		unsigned int pal_addr = 0;
-		int src_format = 0;
-		if (src->bpp == 32)
-			src_format = 0;
-		else if ((src->bpp == 8) && src->clut.data)
-		{
-			src_format = 1;
-			/* sync pal */
-			if (src->clut.data_phys == 0)
-			{
-				/* sync pal */
-				pal_addr = src->stride * src->y;
-				unsigned int *pal = (unsigned int*)(((unsigned char*)src->data) + pal_addr);
-				pal_addr += src->data_phys;
-				for (int i = 0; i < src->clut.colors; ++i)
-					*pal++ = src->clut.data[i].argb() ^ 0xFF000000;
-				src->clut.data_phys = pal_addr;
-			}
-			else
-			{
-				pal_addr = src->clut.data_phys;
-			}
-		} else
-			return -1; /* unsupported source format */
-
-		bcm_accel_blit(
-			src->data_phys, src->x, src->y, src->stride, src_format,
-			dst->data_phys, dst->x, dst->y, dst->stride,
-			area.left(), area.top(), area.width(), area.height(),
-			p.x(), p.y(), p.width(), p.height(),
-			pal_addr, flags);
-		return 0;
-	}
-#endif
 	return -1;
 }
 
@@ -276,37 +199,16 @@ int gAccel::fill(gUnmanagedSurface *dst, const eRect &area, unsigned long col)
 #ifdef FORCE_NO_FILL_ACCELERATION
 	return -1;
 #endif
-#ifdef BCM_ACCEL
-	if (!m_bcm_accel_state) {
-		bcm_accel_fill(
-			dst->data_phys, dst->x, dst->y, dst->stride,
-			area.left(), area.top(), area.width(), area.height(),
-			col);
-		return 0;
-	}
-#endif
 	return -1;
 }
 
 int gAccel::accumulate()
 {
-#ifdef BCM_ACCEL
-	if (!m_bcm_accel_state)
-	{
-		return bcm_accel_accumulate();
-	}
-#endif
 	return -1;
 }
 
 int gAccel::sync()
 {
-#ifdef BCM_ACCEL
-	if (!m_bcm_accel_state)
-	{
-		return bcm_accel_sync();
-	}
-#endif
 	return -1;
 }
 
@@ -366,15 +268,9 @@ int gAccel::accelAlloc(gUnmanagedSurface* surface)
 
 void gAccel::accelFree(gUnmanagedSurface* surface)
 {
-#if defined(__sh__)
 	if (surface != 0 && surface->data_phys != 0)
 	{
 		int phys_addr = surface->data_phys;
-#else
-	int phys_addr = surface->data_phys;
-	if (phys_addr != 0)
-	{
-#endif
 #ifdef ACCEL_DEBUG
 		eDebug("[gAccel] [%s] %p->%x %dx%d:%d", __func__, surface, surface->data_phys, surface->x, surface->y, surface->bpp);
 #endif
