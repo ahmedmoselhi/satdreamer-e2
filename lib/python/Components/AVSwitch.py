@@ -118,7 +118,7 @@ def InitAVSwitch():
 	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
 	"panscan": _("Zoom"),
 	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
-	"nonlinear": _("Stretch")}
+	"scale": _("Stretch")}
 	try:
 		if "nonlinear" in open("/proc/stb/video/policy_choices").read():
 			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
