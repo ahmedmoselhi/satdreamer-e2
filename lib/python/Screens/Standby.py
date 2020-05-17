@@ -53,6 +53,12 @@ class Standby(Screen):
 		if os.path.exists("/usr/script/standby_enter.sh"):
 			Console().ePopen("/usr/script/standby_enter.sh")
 
+		if SystemInfo["HDMIOutput"]:
+			try:
+				open(SystemInfo["HDMIOutput"], "w").write("off")
+			except:
+				pass
+
 		self["actions"] = ActionMap( [ "StandbyActions" ],
 		{
 			"power": self.Power,
@@ -151,6 +157,11 @@ class Standby(Screen):
 		Console().ePopen("/bin/vdstandby -d &")
 		if os.path.exists("/usr/script/standby_leave.sh"):
 			Console().ePopen("/usr/script/standby_leave.sh")
+		if SystemInfo["HDMIOutput"]:
+			try:
+				open(SystemInfo["HDMIOutput"], "w").write("on")
+			except:
+				pass
 		if config.usage.remote_fallback_import_standby.value:
 			ImportChannels()
 
