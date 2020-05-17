@@ -312,7 +312,13 @@ class HdmiCec:
 
 			if config.hdmicec.debug.value != "0":
 				self.debugRx(length, cmd, data)
-			if cmd == 0x00:
+			if cmd == self.lastCmd:
+				print "eHdmiCec: ignore duplicate cmd %02X" % cmd
+				return
+			else:
+				self.lastCmd = cmd
+
+                        if cmd == 0x00:
 				if length == 0: # only polling message ( it's some as ping )
 					print "eHdmiCec: received polling message"
 				else:

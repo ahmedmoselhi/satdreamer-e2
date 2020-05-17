@@ -938,7 +938,20 @@ class InfoBarMenu:
 		self["MenuActions"] = HelpableActionMap(self, "InfobarMenuActions",
 			{
 				"mainMenu": (self.mainMenu, _("Enter main menu")),
+				"openSoftcam": (self.openSoftcam, _("Open Softcam...")),
+				"openPluginBrowser": (self.openPluginBrowser, _("Open PluginBrowser...")),
 			})
+		self.session.infobar = None
+
+	def openPluginBrowser(self):
+		from Screens.PluginBrowser import PluginBrowser
+		self.session.openWithCallback(self.mainMenuClosed, PluginBrowser)
+		self.session.infobar = None
+
+	def openSoftcam(self):
+		from Components.ConfigList import ConfigListScreen
+		from Screens.SoftcamSetup import SoftcamSetup
+		self.session.openWithCallback(self.mainMenuClosed, SoftcamSetup)
 		self.session.infobar = None
 
 	def mainMenu(self):
