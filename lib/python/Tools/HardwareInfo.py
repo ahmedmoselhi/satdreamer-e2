@@ -36,7 +36,7 @@ class HardwareInfo:
 
 		# Model
 		try:
-			self.device_model = open("/proc/stb/info/boxtype").read().strip()
+			self.device_model = prefix + open("/proc/stb/info/" + infoFname).read().strip().lower().replace(" ", "")
 		except:
 			pass
 

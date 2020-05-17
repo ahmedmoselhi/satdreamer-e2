@@ -200,7 +200,8 @@ class CommitInfo(Screen):
 		self.project = 0
 		self.projects = [
 			("https://api.github.com/repos/openpli/enigma2/commits" + branch, "Enigma2"),
-			("https://api.github.com/repos/openpli/openpli-oe-core/commits" + branch, "Openpli Oe Core"),
+			("https://api.github.com/repos/satdreamgr/oe-core/commits", "SatDreamGR OE Core"),
+			("https://api.github.com/repos/satdreamgr/Satdreamgr-HD-TranspBA/commits", "Skin TransBA"),
 			("https://api.github.com/repos/openpli/enigma2-plugins/commits", "Enigma2 Plugins"),
 			("https://api.github.com/repos/openpli/aio-grab/commits", "Aio Grab"),
 			("https://api.github.com/repos/openpli/enigma2-plugin-extensions-epgimport/commits", "Plugin EPGImport"),
