@@ -5,7 +5,7 @@ SUBDIRS = SoftwareManager PositionerSetup Satfinder \
 	DefaultServicesScanner DiseqcTester CommonInterfaceAssignment \
 	CableScan FastScan OSDPositionSetup OSD3DSetup HdmiCEC VideoClippingSetup \
 	VideoEnhancement WirelessLan NetworkWizard VFD-Icons \
-	SH4BoosterControl SH4OSDAdjustment WirelessLan
+	SH4BoosterControl SH4OSDAdjustment
 
 if HAVE_TEMPFANCONTROL
 SUBDIRS += TempFanControl
