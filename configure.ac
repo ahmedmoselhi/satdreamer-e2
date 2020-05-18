@@ -328,6 +328,8 @@ lib/python/Plugins/Extensions/PicturePlayer/data/Makefile
 lib/python/Plugins/Extensions/SocketMMI/Makefile
 lib/python/Plugins/Extensions/SocketMMI/meta/Makefile
 lib/python/Plugins/Extensions/SocketMMI/src/Makefile
+lib/python/Plugins/Extensions/sparkVFD/Makefile
+lib/python/Plugins/Extensions/sparkVFD/meta/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/meta/Makefile
 lib/python/Plugins/PLi/Makefile
@@ -362,8 +364,6 @@ lib/python/Plugins/SystemPlugins/Videomode/Makefile
 lib/python/Plugins/SystemPlugins/Videomode/meta/Makefile
 lib/python/Plugins/SystemPlugins/WirelessLan/Makefile
 lib/python/Plugins/SystemPlugins/WirelessLan/meta/Makefile
-lib/python/Plugins/SystemPlugins/sparkVFD/Makefile
-lib/python/Plugins/SystemPlugins/sparkVFD/meta/Makefile
 lib/python/Plugins/SystemPlugins/SH4OSDAdjustment/Makefile
 lib/python/Plugins/SystemPlugins/SH4OSDAdjustment/meta/Makefile
 lib/python/Plugins/SystemPlugins/SH4BoosterControl/Makefile
