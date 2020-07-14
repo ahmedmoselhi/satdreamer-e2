@@ -75,12 +75,10 @@ struct AvahiServiceEntry
 	{
 		eDebug("[Avahi] AvahiServiceEntry %s (%s) %u", service_name, service_type, port_num);
 	}
-
 	AvahiServiceEntry():
 		group(NULL),
 		service_name(NULL),
 		service_type(NULL)
-
 	{}
 };
 inline bool operator==(const AvahiServiceEntry& lhs, const AvahiServiceEntry& rhs)

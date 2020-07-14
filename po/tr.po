@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-06-25 13:29+0200\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -120,11 +120,11 @@ msgid "%.0f kB"
 msgstr ""
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -238,7 +238,7 @@ msgstr ""
 msgid "%d min"
 msgstr "%d dk"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d dakika"
@@ -451,6 +451,9 @@ msgstr "16:9 Sinemaskop"
 msgid "16:9 always"
 msgstr "16:9 Her Zaman"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -511,6 +514,10 @@ msgstr "4:3 Sinemaskop"
 msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 msgid "5"
 msgstr "5"
 
@@ -526,6 +533,10 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -535,12 +546,27 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ""
 
-msgid "<Current movielist location>"
-msgstr "<Mevcut film listesi konumu>"
+#, fuzzy
+msgid "< Current >"
+msgstr "Mevcut değer: "
 
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "Varsayılan ayarlar"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "Varsayılan"
+
+msgid "< Emergency >"
+msgstr ""
+
+#, fuzzy
+msgid "< Pending restart >"
+msgstr "Kapatma"
+
+msgid "<Current movielist location>"
+msgstr "<Mevcut film listesi konumu>"
 
 msgid "<Default movie location>"
 msgstr "<Varsayılan film konumu>"
@@ -703,9 +729,6 @@ msgstr "Favori düzenlemekten vazgeç"
 
 msgid "About"
 msgstr "Hakkında"
-
-msgid "About..."
-msgstr "Hakkında..."
 
 msgid "Accesspoint:"
 msgstr "Erişim noktası:"
@@ -1027,6 +1050,10 @@ msgstr "Etkinlik"
 msgid "Arabic"
 msgstr "Arapça"
 
+#, fuzzy
+msgid "Are you sure to delete image:"
+msgstr "Bu giriş silinecek. Emin misin?"
+
 msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Bütün Buketler silinecek. Emin misin?"
 
@@ -1046,6 +1073,10 @@ msgstr "Tüm karasal servisler silinecek. Emin misin?"
 
 msgid "Are you sure to remove this entry?"
 msgstr "Bu giriş silinecek. Emin misin?"
+
+#, fuzzy
+msgid "Are you sure to restore all deleted images"
+msgstr "Bütün kablo servisleri silinecek. Emin misin?"
 
 msgid ""
 "Are you sure you want to activate this network configuration?\n"
@@ -1351,11 +1382,11 @@ msgstr "Basque"
 msgid "Begin time"
 msgstr "Başlama zamanı"
 
+msgid "Behavior of '0' button in PiP mode"
+msgstr "RiR kipinde 0 tuşu görevi"
+
 msgid "Behavior of 'pause and ok' when paused"
 msgstr "Durdurulduğunda 'Dur ve OK' davranışı"
-
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "RiR kipinde 0 tuşu görevi"
 
 msgid "Behavior when a movie is started"
 msgstr "Film başlatıldığı zaman"
@@ -1427,6 +1458,10 @@ msgstr ""
 
 msgid "Boot to Recovery menu"
 msgstr ""
+
+#, fuzzy
+msgid "Bootup time"
+msgstr "Sıralama zamanı"
 
 msgid "Bosnia and Herzegovina"
 msgstr ""
@@ -1580,8 +1615,18 @@ msgstr ""
 msgid "Cancel"
 msgstr "Vazgeç"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Kanal Seçimi"
 
 msgid "Cancelled upon user request"
 msgstr ""
@@ -1803,7 +1848,7 @@ msgstr "TV ekranını LCD ye yansıt"
 msgid "Close"
 msgstr "Kapat"
 
-msgid "Close PiP on exit"
+msgid "Close PiP with 'exit' button"
 msgstr "RiR Kapat ve Çık"
 
 msgid "Close title selection"
@@ -1829,6 +1874,10 @@ msgstr "Koleksiyon ayarları"
 
 #, fuzzy
 msgid "Colombia"
+msgstr "Renk formatı"
+
+#, fuzzy
+msgid "Color"
 msgstr "Renk formatı"
 
 msgid "Color format"
@@ -1916,6 +1965,10 @@ msgstr "Altyazı senkronizasyonu için gecikme yapılandırması."
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Altyazı senkronizasyonu için gecikme yapılandırması."
 
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Ağ maskesini yapılandırın."
+
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Bilgi çubuğunun görünme süresi."
 
@@ -1934,7 +1987,7 @@ msgstr "Fanın nasıl çalışması gerektiğini yapılandırın"
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr "Şİfreli Kanal simgesinin kanal listesinde görünme şekli"
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "En son uzun süre bakılan RiR servisini hatırlama ayarı. "
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
@@ -2042,7 +2095,7 @@ msgstr "Dördüncü ses dilini yapılandırın."
 msgid "Configure the fourth subtitle language."
 msgstr "Dördüncü altyazı dili yapılandırın."
 
-msgid "Configure the function of the '0' button do when PIP is active."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr "RiR aktif olduğunda '0 'düğmesinin işlevini yapılandırın."
 
 msgid "Configure the gateway."
@@ -2554,6 +2607,10 @@ msgid "Default settings"
 msgstr "Varsayılan ayarlar"
 
 #, fuzzy
+msgid "Default timer type"
+msgstr "Zamanlayıcıyı sil"
+
+#, fuzzy
 msgid "Define the location of the EPG Cache file."
 msgstr "Ekranın en boy oranını yapılandırın."
 
@@ -2623,6 +2680,10 @@ msgstr "Ekranda yazı kaydırken, geçiş/bekleme zamanını milisaniye..."
 msgid "Delete"
 msgstr "Sil"
 
+#, fuzzy
+msgid "Delete Image"
+msgstr "Zamanlayıcıyı sil"
+
 msgid "Delete entry"
 msgstr "Seçimi sil"
 
@@ -2642,10 +2703,14 @@ msgstr "Çalma listesi girdisini silin"
 msgid "Delete saved playlist"
 msgstr "Kayıtlı çalma listesini silin"
 
-msgid "Delete the character to the left of text buffer cursor"
+#, fuzzy
+msgid "Delete the all the text"
+msgstr "Çalma listesi girdisini silin"
+
+msgid "Delete the character to the left of text cursor"
 msgstr ""
 
-msgid "Delete the character under the text buffer cursor"
+msgid "Delete the character under the text cursor"
 msgstr ""
 
 msgid "Delete timer"
@@ -2653,6 +2718,10 @@ msgstr "Zamanlayıcıyı sil"
 
 msgid "Deleted"
 msgstr "Silinmiş"
+
+#, fuzzy
+msgid "Deleted image"
+msgstr "Zamanlayıcıyı sil"
 
 msgid "Deleted items"
 msgstr "Silinmiş öğeler"
@@ -2804,6 +2873,10 @@ msgstr "Zaman Kaydırmayı kaydet geçerli olay için"
 msgid "Display EPG list for current channel"
 msgstr "Mevcut kanal için EPG göster..."
 
+#, fuzzy
+msgid "Display Skin"
+msgstr "Ekran kurulumu"
+
 msgid "Display and userinterface"
 msgstr "Görüntüleme ve kullanıcı arayüzü"
 
@@ -2940,7 +3013,7 @@ msgstr ""
 msgid "Do you want to reboot your receiver?"
 msgstr "Yeniden başlatmak istiyor musunuz?"
 
-msgid "Do you want to remove all the crahs logfiles"
+msgid "Do you want to remove all the crash logfiles"
 msgstr ""
 
 msgid "Do you want to remove the package:\n"
@@ -3050,6 +3123,9 @@ msgstr "EPG Dil seçimi"
 
 msgid "EPG settings"
 msgstr "EPG ayarları"
+
+msgid "EPG:"
+msgstr ""
 
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
@@ -3280,9 +3356,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Çekirdek sürümü:"
 
-msgid "Enigma2 skin selector"
-msgstr "Arayüz Seçici"
-
 #, fuzzy
 msgid "Enter"
 msgstr "Merkez"
@@ -3377,9 +3450,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-msgid "Error executing plugin"
-msgstr "Eklentinin çalıştırılması sırasında hata oluştu"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -3555,6 +3625,10 @@ msgstr "Harici altyazı iletişim kutusunu renklendir"
 msgid "External subtitle switch fonts"
 msgstr "Harici altyazı yazı tipini değiştir"
 
+#, fuzzy
+msgid "Externally powered"
+msgstr "Harici Depolama %s"
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "İlave bitirme saati için uyku zamanlayıcıyı görmezden gel"
 
@@ -3600,6 +3674,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC:"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "FTA"
@@ -3872,17 +3949,14 @@ msgstr "Çekirdek sürümü:"
 msgid "GUI Settings"
 msgstr "Ayarlar"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Ayarlar"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Yeni arayüzü etkinleştirmek için yeniden başlatma gerekiyor\n"
-"Grafik arayüzünü (GUI) yeniden başlatmak istiyor musunuz?"
 
 msgid "Gabon"
 msgstr ""
@@ -4043,11 +4117,18 @@ msgstr ""
 msgid "H"
 msgstr ""
 
+#, fuzzy
+msgid "HD"
+msgstr "D"
+
 msgid "HD list"
 msgstr "HD listesi"
 
 msgid "HD2400"
 msgstr "HD2400"
+
+msgid "HD60"
+msgstr ""
 
 msgid "HDMI"
 msgstr ""
@@ -4379,7 +4460,7 @@ msgstr "http akışlarında ECM dahil"
 msgid "Include EIT in http streams"
 msgstr "http akışlarında EIT dahil"
 
-msgid "Incorrect type service for PiP!"
+msgid "Incorrect service type for Picture in Picture!"
 msgstr "RiR için geçersiz servis!"
 
 msgid "Increased voltage"
@@ -4536,9 +4617,6 @@ msgstr ""
 
 msgid "Invert"
 msgstr "Ters"
-
-msgid "Ipkg"
-msgstr "Ipkg"
 
 msgid "Iran (Islamic Republic of)"
 msgstr ""
@@ -4956,6 +5034,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Üretici"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Please wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr "Kayıttan sonra Marj (dakika)"
 
@@ -5116,7 +5199,7 @@ msgstr "Bağla"
 msgid "Move"
 msgstr "Taşı"
 
-msgid "Move PIP"
+msgid "Move PiP"
 msgstr "RiR Taşı"
 
 msgid "Move PiP to main picture"
@@ -5128,32 +5211,50 @@ msgstr "Resim içinde resim (RiR)'i taşı"
 msgid "Move east"
 msgstr "Doğuya taşı"
 
-msgid "Move the text buffer cursor left"
+msgid "Move the keyboard cursor down"
 msgstr ""
 
-msgid "Move the text buffer cursor right"
+msgid "Move the keyboard cursor left"
 msgstr ""
 
-msgid "Move the text buffer cursor to the first character"
+msgid "Move the keyboard cursor right"
 msgstr ""
 
-msgid "Move the text buffer cursor to the last character"
+msgid "Move the keyboard cursor up"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Sonraki açıyı seç"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Bir alta taşı"
+
+msgid "Move the text cursor to the first character"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor left"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor right"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor up"
+msgid "Move the text cursor to the last character"
 msgstr ""
 
 msgid "Move to position X"
 msgstr "'X' pozisyonuna taşı"
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "Sonraki açıyı seç"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "Bir alta taşı"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "Önceki bölüme geri git"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "Bir üste taşı"
 
 msgid "Move west"
 msgstr "Batıya taşı"
@@ -5211,8 +5312,8 @@ msgid "MultiType"
 msgstr "Çoklu Ortam"
 
 #, fuzzy
-msgid "Multiboot"
-msgstr "Çoklu Uydu"
+msgid "Multiboot image selector"
+msgstr "Çok Uydu tümünü seç"
 
 msgid "Multichannel PCM"
 msgstr ""
@@ -5712,6 +5813,18 @@ msgstr "Tuner Kurulumu"
 
 msgid "Open the movie list"
 msgstr "Film listesinden aç"
+
+msgid "Operating LED status in deep standby mode"
+msgstr ""
+
+msgid "Operating LED status in standby mode"
+msgstr ""
+
+msgid "Operating LED status while running."
+msgstr ""
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Zamanlayıcı Devredışı"
@@ -6343,7 +6456,8 @@ msgstr "Ek seçenekler için uzaktan kumanda üzerindeki MENU düğmesine basın
 msgid "Press OK on your remote control to continue."
 msgstr "Devam etmek için kumandanızın OK tuşuna basın."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Arayüzü etkinleştirmek için OK'a basın."
 
 msgid "Press OK to activate the settings."
@@ -6355,6 +6469,10 @@ msgstr "Düzenlemek için OK tuşuna basın."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "%s detayları için OK tuşuna basın"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Arayüzü etkinleştirmek için OK'a basın."
 
 msgid "Press OK to scan"
 msgstr "Arama için OK'a basın"
@@ -6542,6 +6660,10 @@ msgstr "Tamamlanan zamanlayıcıları silmek istiyor musunuz?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Alt servislerde hızlı kanal değiştirme iptal olsun mu?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Fabrika ayarları koruması"
 
 msgid "Really reboot now?"
 msgstr "Yeniden başlatmak istiyor musunuz?"
@@ -6876,6 +6998,14 @@ msgstr "Geri Yükle"
 msgid "Restore backups"
 msgstr "Yedekten geri yükle"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Varsayılan olarak ayarla"
+
+#, fuzzy
+msgid "Restore deleted images"
+msgstr "Silinen buketleri geri yükle"
+
 msgid "Restore deleted user bouquets"
 msgstr "Silinen buketleri geri yükle"
 
@@ -6911,10 +7041,6 @@ msgstr "Oynatmaya devam ediliyor"
 #, fuzzy
 msgid "Retrieving image list - Please wait..."
 msgstr "Eklenti bilgisi getiriliyor. Lütfen bekleyin..."
-
-#, fuzzy
-msgid "Retrieving image slots - Please wait..."
-msgstr "Güncellemeler kontrol ediliyor. Lütfen bekleyin..."
 
 msgid "Return to movie list"
 msgstr "Film listesine geri dön"
@@ -7103,6 +7229,10 @@ msgstr "Kaydet"
 #, fuzzy
 msgid "Save / Enter text and exit"
 msgstr "Kaydet ve çık"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Arayüzü etkinleştirmek için OK'a basın."
 
 msgid "Save and exit"
 msgstr "Kaydet ve çık"
@@ -7348,14 +7478,6 @@ msgstr ""
 msgid "Select HDD"
 msgstr "HDD Seç"
 
-#, fuzzy
-msgid "Select Image"
-msgstr "Film seç"
-
-#, fuzzy
-msgid "Select Multiboot"
-msgstr "Yuva (Slot) seç"
-
 msgid "Select Softcam"
 msgstr "SoftCam Seç"
 
@@ -7368,8 +7490,9 @@ msgstr "Film seç"
 msgid "Select a network adapter"
 msgstr "Bir ağ bağdaştırıcısı seçin"
 
+#, fuzzy
 msgid "Select a skin"
-msgstr "Bir Arayüz seçin"
+msgstr "Eylem seçimi"
 
 msgid "Select a tuner"
 msgstr "Bir Tuner seçin"
@@ -7485,8 +7608,12 @@ msgstr ""
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr ""
 
-msgid "Select the character or action under the virtual keyboard cursor"
+msgid "Select the character or action under the keyboard cursor"
 msgstr ""
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Film yolunu seçin"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr ""
@@ -7518,6 +7645,17 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+#, fuzzy
+msgid "Select the shifted character set"
+msgstr "Film yolunu seçin"
+
+msgid "Select the shifted character set for the next character only"
+msgstr ""
+
+#, fuzzy
+msgid "Select the time zone within the area or region."
+msgstr "Seçileni sıralama yöntemi:"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -7533,15 +7671,6 @@ msgstr ""
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr ""
 
-msgid "Select the virtual keyboard locale from a menu"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr ""
-
 msgid "Select update source"
 msgstr "Güncelleme kaynağı seçin"
 
@@ -7554,15 +7683,15 @@ msgstr "Yukarı / aşağı düğmeleri ile  video girişi seçin"
 msgid "Select video mode"
 msgstr "Video modu seç"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "Kablosuz ağ seçin"
 
 #, fuzzy
 msgid "Select your ATSC provider."
 msgstr "Eklenecek yayıncıyı seçin..."
-
-msgid "Select your Skin"
-msgstr ""
 
 msgid ""
 "Select your backup device.\n"
@@ -7582,6 +7711,10 @@ msgstr "Sağlayıcı seçin ve taramayı başlatmak için OK tuşuna basın"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
+
+#, fuzzy
+msgid "Select your time zone area or region."
+msgstr "Seçileni sıralama yöntemi:"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Seçilen uydular 1 (USALS)"
@@ -7729,9 +7862,6 @@ msgstr ""
 msgid "Set default"
 msgstr "Varsayılan olarak ayarla"
 
-msgid "Set default settings?"
-msgstr ""
-
 msgid "Set end time"
 msgstr "Bitiş zamanını ayarla"
 
@@ -7861,7 +7991,7 @@ msgstr "Gösteri Oyunlarını göster"
 msgid "Show InfoBar"
 msgstr "Bilgi Çubuğunu Göster"
 
-msgid "Show PIP"
+msgid "Show PiP"
 msgstr "RiR Göster"
 
 msgid "Show SNR percentage instead of dB value"
@@ -8156,11 +8286,15 @@ msgstr "Sayfa enlemi"
 msgid "Site longitude"
 msgstr "Sayfa boylamı"
 
-msgid "Skin"
-msgstr "Arayüz"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Eylem seçimi"
+
+msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 msgid "Skins"
@@ -8638,11 +8772,23 @@ msgstr "Altyazı seçimi ..."
 msgid "Subtitle settings"
 msgstr "Altyazı ayarları"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Altyazı seçimi ..."
+
 msgid "Subtitles"
 msgstr "Altyazı"
 
 msgid "Subtitles Settings"
 msgstr "Alt Yazı Ayarları"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Alt Yazı Ayarları"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Limit etkin"
 
 msgid "Succeeded:"
 msgstr ""
@@ -8663,7 +8809,7 @@ msgstr "Kanal adı"
 msgid "Svalbard and Jan Mayen"
 msgstr ""
 
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr "RiR Değiştir"
 
 msgid "Swap PiP and main picture"
@@ -8699,6 +8845,18 @@ msgstr "Kanal Aşağı"
 
 msgid "Switch channel up"
 msgstr "Kanal Yukarı"
+
+#, fuzzy
+msgid "Switch on the display during Standby Mode"
+msgstr "Ekran ve kullanıcı arayüzü eklentilerini listele."
+
+#, fuzzy
+msgid "Switch on the display during Suspend Mode"
+msgstr "Ekran ve kullanıcı arayüzü eklentilerini listele."
+
+#, fuzzy
+msgid "Switch on the display during operation."
+msgstr "Ekran ve kullanıcı arayüzü eklentilerini listele."
 
 msgid "Switch to TV mode"
 msgstr "TV moduna geç"
@@ -8775,6 +8933,9 @@ msgid "T2MI PLP ID"
 msgstr "PLP ID"
 
 msgid "T2MI RAW Mode"
+msgstr ""
+
+msgid "TEXT"
 msgstr ""
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
@@ -9283,6 +9444,14 @@ msgstr "Zaman"
 msgid "Time scale"
 msgstr "Zaman cetveli"
 
+#, fuzzy
+msgid "Time zone"
+msgstr "Zaman dilimi"
+
+#, fuzzy
+msgid "Time zone area"
+msgstr "Zaman dilimi"
+
 msgid "Timer"
 msgstr "Zamanlayıcı"
 
@@ -9323,6 +9492,10 @@ msgstr "Zamanlayıcı seçimi..."
 msgid "Timer type"
 msgstr "Zamanlayıcı tipi"
 
+#, fuzzy
+msgid "Timer:"
+msgstr "Zamanlayıcı"
+
 msgid "Timeshift"
 msgstr "Zaman Kaydırma"
 
@@ -9353,8 +9526,16 @@ msgstr "Başlık özellikleri"
 msgid "Titleset mode"
 msgstr "Başlıkseti kipi"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Ses seçimi için"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Altyazı seçimi için"
@@ -9368,7 +9549,7 @@ msgstr "HDMI girişini değiştir"
 msgid "Toggle LCD LiveTV"
 msgstr "LCD LiveTV"
 
-msgid "Toggle PIPzap"
+msgid "Toggle PiPzap"
 msgstr "RiRzap"
 
 msgid "Toggle TV/RADIO mode"
@@ -9389,8 +9570,15 @@ msgstr ""
 msgid "Toggle show/hide"
 msgstr ""
 
+msgid "Toggle subtitles show/hide"
+msgstr ""
+
 msgid "Toggle the tv and the radio player..."
 msgstr ""
+
+#, fuzzy
+msgid "Toggle videomode"
+msgstr "Video modu seç"
 
 msgid "Togo"
 msgstr ""
@@ -10195,7 +10383,7 @@ msgstr ""
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Ne zaman enigma2 etkin bağlantısız buket yükleyecektir. Bu, mevcut değil, fakat bouquets.tv ya bouquets.radio dosyaları dahil değildir userbouquets zaten yüklü olacağı anlamına gelir. Yüklü ayarlar yükseltilmiş ise bu kendi kullanıcı buket tutmak için örneğin yapmanızı sağlar"
 
-msgid "When enabled the PiP can be closed by the exit button."
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Etkin olduğunda RiR çıkış düğmesi ile kapatılabilir."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
@@ -10433,6 +10621,19 @@ msgstr ""
 msgid "With popup"
 msgstr "Açılır Pencerede ile"
 
+#, fuzzy
+msgid "With this option you can switch on the display during operation."
+msgstr "Ekran ve kullanıcı arayüzü eklentilerini listele."
+
+msgid "With this option you can switch on the display in Deep Standby Mode."
+msgstr ""
+
+msgid "With this option you can switch on the display in Standby Mode."
+msgstr ""
+
+msgid "With this option you can switch the LED color or deactivate the LED."
+msgstr ""
+
 msgid "Without popup"
 msgstr "Açılır Pencerede olmadan"
 
@@ -10611,6 +10812,9 @@ msgstr "Bekleme süresi : %s!"
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr " %s (%s - '%s') servisine geçmen gerekir!\n"
 
+msgid "You seem to be in timeshift!"
+msgstr ""
+
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Koleksiyonunuz tek katman DVD'ye sığmıyor, çift katman DVD kullanmanız gerekiyor!"
 
@@ -10746,17 +10950,20 @@ msgid "Zap up"
 msgstr "Zap Yukarı"
 
 #, python-format
-msgid "Zapped to timer service %s as PiP!"
+msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr ""
 
 #, fuzzy, python-format
 msgid "Zapped to timer service %s!"
 msgstr "İlk servise git"
 
-msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
+msgid "Zgemma H.S/H.2S/H.2H/H5/H7(old model)"
 msgstr ""
 
-msgid "Zgemma H9/i55 Plus"
+msgid "Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"
+msgstr ""
+
+msgid "Zgemma H9(old model)/I55Plus"
 msgstr ""
 
 msgid "Zgemma Star S/2S/H1/H2"
@@ -11044,7 +11251,8 @@ msgstr "Tarama yapılırken hata"
 msgid "et4000"
 msgstr "et4000"
 
-msgid "et5000/6000"
+#, fuzzy
+msgid "et5000/et6000"
 msgstr "et5000/6000"
 
 msgid "et8000/et10000"
@@ -11053,7 +11261,8 @@ msgstr "et8000/et10000"
 msgid "et9000/et9100"
 msgstr "et9000/et9100"
 
-msgid "et9200/9500/6500"
+#, fuzzy
+msgid "et9200/et9500/et6500"
 msgstr "et9200/9500/6500"
 
 msgid "execute cuts (requires MovieCut plugin)"
@@ -11655,6 +11864,9 @@ msgstr "Taslak dosya"
 msgid "tennis/squash"
 msgstr "Tenis"
 
+msgid "testing"
+msgstr "Çalışıyor"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "Bu buket Aile Koruma Şifresi ile Kilitlenmiş"
 
@@ -11720,6 +11932,9 @@ msgstr "Çeşitli Gösteri"
 msgid "vertical"
 msgstr "Düşey (V)"
 
+msgid "violet"
+msgstr ""
+
 msgid "wait for ci..."
 msgstr "CI bekleniyor..."
 
@@ -11775,9 +11990,6 @@ msgstr "Tuner adının yanında"
 
 msgid "with_errors"
 msgstr ""
-
-msgid "working"
-msgstr "Çalışıyor"
 
 msgid "xp1000"
 msgstr "xp1000"

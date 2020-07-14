@@ -4,12 +4,12 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigSubsection, ConfigBoolean, getConfigListEntry, ConfigSelection, ConfigYesNo, ConfigIP, ConfigNothing
 from Components.Network import iNetwork
-from Components.Ipkg import IpkgComponent
+from Components.Opkg import OpkgComponent
 from enigma import eDVBDB
 
 config.misc.installwizard = ConfigSubsection()
 config.misc.installwizard.hasnetwork = ConfigBoolean(default = False)
-config.misc.installwizard.ipkgloaded = ConfigBoolean(default = False)
+config.misc.installwizard.opkgloaded = ConfigBoolean(default = False)
 config.misc.installwizard.channellistdownloaded = ConfigBoolean(default = False)
 
 class InstallWizard(Screen, ConfigListScreen):
@@ -29,14 +29,14 @@ class InstallWizard(Screen, ConfigListScreen):
 
 		if self.index == self.STATE_UPDATE:
 			config.misc.installwizard.hasnetwork.value = False
-			config.misc.installwizard.ipkgloaded.value = False
+			config.misc.installwizard.opkgloaded.value = False
 			modes = {0: " "}
 			self.enabled = ConfigSelection(choices = modes, default = 0)
 			self.adapters = [adapter for adapter in iNetwork.getAdapterList() if adapter in ('eth0', 'eth1')]
 			self.checkNetwork()
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
 			self.enabled = ConfigYesNo(default = True, graphic = False)
-			modes = {"19e-23e-basis": "Astra1 Astra3 basis", "19e-23e": "Astra 1 Astra 3", "19e-23e-28e": "Astra 1 Astra 2 Astra 3", "13e-19e-23e-28e": "Astra 1 Astra 2 Astra 3 Hotbird", "kabelnl": "Kabel-NL"}
+			modes = {"19e-23e-basis": "Astra1 Astra3 basis", "19e-23e": "Astra 1 Astra 3", "19e-23e-28e": "Astra 1 Astra 2 Astra 3", "13e-19e-23e-28e": "Astra 1 Astra 2 Astra 3 Hotbird", "9e-13e-19e-23e-28e-rotating": "Rotating", "kabelnl": "Kabel-NL"}
 			self.channellist_type = ConfigSelection(choices = modes, default = "19e-23e-basis")
 			self.createMenu()
 		elif self.index == self.INSTALL_PLUGINS:
@@ -120,11 +120,11 @@ class InstallWizard(Screen, ConfigListScreen):
 
 	def run(self):
 		if self.index == self.STATE_UPDATE and config.misc.installwizard.hasnetwork.value:
-			self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (updating packages)'), IpkgComponent.CMD_UPDATE)
+			self.session.open(InstallWizardOpkgUpdater, self.index, _('Please wait (updating packages)'), OpkgComponent.CMD_UPDATE)
 			self.doNextStep = True
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
 			if self.enabled.value:
-				self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (downloading channel list)'), IpkgComponent.CMD_REMOVE, {'package': 'enigma2-plugin-settings-hans-' + self.channellist_type.value})
+				self.session.open(InstallWizardOpkgUpdater, self.index, _('Please wait (downloading channel list)'), OpkgComponent.CMD_REMOVE, {'package': 'enigma2-plugin-settings-hans-' + self.channellist_type.value})
 			self.doNextStep = True
 		elif self.index == self.INSTALL_PLUGINS:
 			if self["config"].getCurrent()[1] == self.doplugins:
@@ -147,14 +147,14 @@ class InstallWizard(Screen, ConfigListScreen):
 			else:
 				self.doNextStep = True
 
-class InstallWizardIpkgUpdater(Screen):
+class InstallWizardOpkgUpdater(Screen):
 	skin = """
 	<screen position="c-300,c-25" size="600,50" title=" ">
 		<widget source="statusbar" render="Label" position="10,5" zPosition="10" size="e-10,30" halign="center" valign="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
 	def __init__(self, session, index, info, cmd, pkg = None):
-		self.skin = InstallWizardIpkgUpdater.skin
+		self.skin = InstallWizardOpkgUpdater.skin
 		Screen.__init__(self, session)
 
 		self["statusbar"] = StaticText(info)
@@ -163,21 +163,21 @@ class InstallWizardIpkgUpdater(Screen):
 		self.index = index
 		self.state = 0
 
-		self.ipkg = IpkgComponent()
-		self.ipkg.addCallback(self.ipkgCallback)
+		self.opkg = OpkgComponent()
+		self.opkg.addCallback(self.opkgCallback)
 
 		if self.index == InstallWizard.STATE_CHOISE_CHANNELLIST:
-			self.ipkg.startCmd(cmd, {'package': 'enigma2-plugin-settings-*'})
+			self.opkg.startCmd(cmd, {'package': 'enigma2-plugin-settings-*'})
 		else:
-			self.ipkg.startCmd(cmd, pkg)
+			self.opkg.startCmd(cmd, pkg)
 
-	def ipkgCallback(self, event, param):
-		if event == IpkgComponent.EVENT_DONE:
+	def opkgCallback(self, event, param):
+		if event == OpkgComponent.EVENT_DONE:
 			if self.index == InstallWizard.STATE_UPDATE:
-				config.misc.installwizard.ipkgloaded.value = True
+				config.misc.installwizard.opkgloaded.value = True
 			elif self.index == InstallWizard.STATE_CHOISE_CHANNELLIST:
 				if self.state == 0:
-					self.ipkg.startCmd(IpkgComponent.CMD_INSTALL, self.pkg)
+					self.opkg.startCmd(OpkgComponent.CMD_INSTALL, self.pkg)
 					self.state = 1
 					return
 				else:

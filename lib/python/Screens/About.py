@@ -360,6 +360,8 @@ class Troubleshoot(Screen):
 				"cancel": self.close,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown,
+				"moveUp": self["AboutScrollLabel"].homePage,
+				"moveDown": self["AboutScrollLabel"].endPage,
 				"left": self.left,
 				"right": self.right,
 				"red": self.red,
@@ -385,7 +387,7 @@ class Troubleshoot(Screen):
 
 	def red(self):
 		if self.commandIndex >= self.numberOfCommands:
-			self.session.openWithCallback(self.removeAllLogfiles, MessageBox, _("Do you want to remove all the crahs logfiles"), default=False)
+			self.session.openWithCallback(self.removeAllLogfiles, MessageBox, _("Do you want to remove all the crash logfiles"), default=False)
 		else:
 			self.close()
 

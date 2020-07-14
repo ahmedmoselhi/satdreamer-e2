@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 19:39+0200\n"
+"POT-Creation-Date: 2020-06-25 13:29+0200\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -123,11 +123,11 @@ msgid "%.0f kB"
 msgstr ""
 
 #, python-format
-msgid "%.1f°E"
+msgid "%.1f° E"
 msgstr ""
 
 #, python-format
-msgid "%.1f°W"
+msgid "%.1f° W"
 msgstr ""
 
 #, python-format
@@ -248,7 +248,7 @@ msgstr ""
 msgid "%d min"
 msgstr "%d min"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minut"
@@ -486,6 +486,9 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "16:9 alltid"
 
+msgid "16K"
+msgstr ""
+
 #
 msgid "18 V"
 msgstr "18 V"
@@ -554,6 +557,11 @@ msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
 #
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
+#
 msgid "5"
 msgstr "5"
 
@@ -572,6 +580,11 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -583,13 +596,31 @@ msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - standard (avstängd)"
 
 #
-msgid "<Current movielist location>"
-msgstr "<Filmlistans aktuella plats>"
+#, fuzzy
+msgid "< Current >"
+msgstr "Nuvarande värde : "
 
 #
 #, fuzzy
-msgid "<Default Skin>"
+msgid "< Default + Picon >"
 msgstr "Grundinställningar"
+
+#
+#, fuzzy
+msgid "< Default >"
+msgstr "Grund"
+
+msgid "< Emergency >"
+msgstr ""
+
+#
+#, fuzzy
+msgid "< Pending restart >"
+msgstr "Viloläge / Omstart"
+
+#
+msgid "<Current movielist location>"
+msgstr "<Filmlistans aktuella plats>"
 
 #
 msgid "<Default movie location>"
@@ -774,10 +805,6 @@ msgstr "Avbryt att editera favoriter"
 #
 msgid "About"
 msgstr "Om"
-
-#
-msgid "About..."
-msgstr "Om..."
 
 #
 msgid "Accesspoint:"
@@ -1150,6 +1177,10 @@ msgstr "Vilken aktivitet som helst"
 msgid "Arabic"
 msgstr "Arabiska"
 
+#, fuzzy
+msgid "Are you sure to delete image:"
+msgstr "Är du säker på att ta bort denna posten?"
+
 msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Är du säker på att rensa bort alla raderade favoritlistor?"
 
@@ -1169,6 +1200,10 @@ msgstr "Är du säker på att ta bort alla marksända tv-kanaler?"
 
 msgid "Are you sure to remove this entry?"
 msgstr "Är du säker på att ta bort denna posten?"
+
+#, fuzzy
+msgid "Are you sure to restore all deleted images"
+msgstr "Är du säker på att ta bort alla kabel-tv kanaler?"
 
 #
 msgid ""
@@ -1516,12 +1551,12 @@ msgstr "Baskiska"
 msgid "Begin time"
 msgstr "Starttid"
 
+#
+msgid "Behavior of '0' button in PiP mode"
+msgstr "Beteende av '0' knappen i BiB-läge"
+
 msgid "Behavior of 'pause and ok' when paused"
 msgstr "Beteende av 'paus och OK' vid pausad"
-
-#
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "Beteende av '0' knappen i BiB-läge"
 
 #
 msgid "Behavior when a movie is started"
@@ -1601,6 +1636,11 @@ msgstr ""
 
 msgid "Boot to Recovery menu"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Bootup time"
+msgstr "Sortera tid"
 
 #, fuzzy
 msgid "Bosnia and Herzegovina"
@@ -1767,8 +1807,19 @@ msgstr ""
 msgid "Cancel"
 msgstr "Avbryt"
 
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
+
 msgid "Cancel any text changes and exit"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Cancel execution?"
+msgstr "Kanallista"
 
 msgid "Cancelled upon user request"
 msgstr ""
@@ -2021,7 +2072,7 @@ msgstr "Klona TV skärm till LCD"
 msgid "Close"
 msgstr "Stäng"
 
-msgid "Close PiP on exit"
+msgid "Close PiP with 'exit' button"
 msgstr "Avsluta BiB med exitknappen"
 
 #
@@ -2051,6 +2102,11 @@ msgstr "Samlingsinställning"
 #
 #, fuzzy
 msgid "Colombia"
+msgstr "Färgformat"
+
+#
+#, fuzzy
+msgid "Color"
 msgstr "Färgformat"
 
 #
@@ -2154,6 +2210,11 @@ msgstr "Konfigurera ytterligare en fördröjning för att förbättra extern und
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Konfigurera ytterligare en fördröjning för att förbättra undertextsynkronisering."
 
+#
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Konfigurera nätmasken."
+
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Konfigurera hur länge infobalken är synlig efter aktivering."
 
@@ -2172,7 +2233,7 @@ msgstr "Konfigurera hur fläkten skall fungera."
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr "Konfigurera om och hur krypteringsikoner skall visas i kanallistan."
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Konfigurera om och hur länge den senaste kanalen i BiB skall kommas ihåg."
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
@@ -2286,7 +2347,7 @@ msgstr "Konfigurera det fjärde ljudspråket."
 msgid "Configure the fourth subtitle language."
 msgstr "Konfigurera det fjärde undertextspråket."
 
-msgid "Configure the function of the '0' button do when PIP is active."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr "Konfigurera beteendet på '0' knappen när BiB är aktiv."
 
 #
@@ -2854,6 +2915,10 @@ msgid "Default settings"
 msgstr "Grundinställningar"
 
 #, fuzzy
+msgid "Default timer type"
+msgstr "Radera timer"
+
+#, fuzzy
 msgid "Define the location of the EPG Cache file."
 msgstr "Konfigurera bildförhållandet på skärmen."
 
@@ -2924,6 +2989,10 @@ msgstr "Fördröjning i millisekunder mellan rullande tecken på display."
 msgid "Delete"
 msgstr "Ta bort"
 
+#, fuzzy
+msgid "Delete Image"
+msgstr "Radera timer"
+
 #
 msgid "Delete entry"
 msgstr "Ta bort kanal"
@@ -2948,10 +3017,15 @@ msgstr "Ta bort post i spellista"
 msgid "Delete saved playlist"
 msgstr "Ta bort sparad spellista"
 
-msgid "Delete the character to the left of text buffer cursor"
+#
+#, fuzzy
+msgid "Delete the all the text"
+msgstr "Ta bort post i spellista"
+
+msgid "Delete the character to the left of text cursor"
 msgstr ""
 
-msgid "Delete the character under the text buffer cursor"
+msgid "Delete the character under the text cursor"
 msgstr ""
 
 msgid "Delete timer"
@@ -2959,6 +3033,10 @@ msgstr "Radera timer"
 
 msgid "Deleted"
 msgstr "Raderad"
+
+#, fuzzy
+msgid "Deleted image"
+msgstr "Radera timer"
 
 msgid "Deleted items"
 msgstr "Raderade objekt"
@@ -3132,6 +3210,11 @@ msgid "Display EPG list for current channel"
 msgstr "Visa EPG för aktuell kanal ..."
 
 #
+#, fuzzy
+msgid "Display Skin"
+msgstr "Displayinställningar"
+
+#
 msgid "Display and userinterface"
 msgstr "Display och Användargränssnitt"
 
@@ -3290,7 +3373,7 @@ msgstr "Vill du avsluta överskanningsguiden?"
 msgid "Do you want to reboot your receiver?"
 msgstr "Vill du starta om din mottagare?"
 
-msgid "Do you want to remove all the crahs logfiles"
+msgid "Do you want to remove all the crash logfiles"
 msgstr "Vill du ta bort alla crashloggsfiler"
 
 #
@@ -3418,6 +3501,9 @@ msgstr "EPG val"
 
 msgid "EPG settings"
 msgstr "EPG inställningar"
+
+msgid "EPG:"
+msgstr ""
 
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
@@ -3676,9 +3762,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Kernel Version : "
 
-msgid "Enigma2 skin selector"
-msgstr "Val av utseende"
-
 #, fuzzy
 msgid "Enter"
 msgstr "centrera"
@@ -3779,10 +3862,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-#
-msgid "Error executing plugin"
-msgstr "Fel vid körning av plugin"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -3980,6 +4059,10 @@ msgstr "Extern undertextfärg"
 msgid "External subtitle switch fonts"
 msgstr "Extrena växlingsbara undertextfonter"
 
+#, fuzzy
+msgid "Externally powered"
+msgstr "Extern lagring %s"
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Extra sluttid för att ignorera inaktiv insomningstimer"
 
@@ -4030,6 +4113,9 @@ msgstr "FEC"
 
 msgid "FEC:"
 msgstr "FEC :"
+
+msgid "FHD"
+msgstr ""
 
 msgid "FTA"
 msgstr "FTA"
@@ -4332,19 +4418,16 @@ msgstr "Kernel Version : "
 msgid "GUI Settings"
 msgstr "Inställningar"
 
+#
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Inställningar"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "GUI måste startas om för att aktivera ett nytt språk\n"
-"Vill du starta om GUI nu?"
-
-#
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"GUI måste startas om för att aktivera ett nytt utseende\n"
 "Vill du starta om GUI nu?"
 
 msgid "Gabon"
@@ -4518,10 +4601,18 @@ msgstr ""
 msgid "H"
 msgstr ""
 
+#
+#, fuzzy
+msgid "HD"
+msgstr "D"
+
 msgid "HD list"
 msgstr "HD lista"
 
 msgid "HD2400"
+msgstr ""
+
+msgid "HD60"
 msgstr ""
 
 msgid "HDMI"
@@ -4875,7 +4966,7 @@ msgstr "Inkludera ECM i http strömmar"
 msgid "Include EIT in http streams"
 msgstr "Inkludera EIT i http strömmar"
 
-msgid "Incorrect type service for PiP!"
+msgid "Incorrect service type for Picture in Picture!"
 msgstr "Felaktig kanal för BiB!"
 
 #
@@ -5057,10 +5148,6 @@ msgstr ""
 
 msgid "Invert"
 msgstr "Invertera"
-
-#
-msgid "Ipkg"
-msgstr "Ipkg"
 
 msgid "Iran (Islamic Republic of)"
 msgstr ""
@@ -5541,6 +5628,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Tillverkare"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Please wait until enigma2 restarts"
+msgstr ""
+
 #
 msgid "Margin after recording (minutes)"
 msgstr "Marginal efter inspelning (i minuter)"
@@ -5726,7 +5818,7 @@ msgstr "Montera"
 msgid "Move"
 msgstr "Flytta"
 
-msgid "Move PIP"
+msgid "Move PiP"
 msgstr "Flytta BiB"
 
 #
@@ -5741,32 +5833,56 @@ msgstr "Flytta Bild i Bild"
 msgid "Move east"
 msgstr "Flytta mot öst"
 
-msgid "Move the text buffer cursor left"
+msgid "Move the keyboard cursor down"
 msgstr ""
 
-msgid "Move the text buffer cursor right"
+msgid "Move the keyboard cursor left"
 msgstr ""
 
-msgid "Move the text buffer cursor to the first character"
+msgid "Move the keyboard cursor right"
 msgstr ""
 
-msgid "Move the text buffer cursor to the last character"
+msgid "Move the keyboard cursor up"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor down"
+#
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "byt till nästa position"
+
+#
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "flytta ner till nästa post"
+
+msgid "Move the text cursor to the first character"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor left"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor right"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor up"
+msgid "Move the text cursor to the last character"
 msgstr ""
 
 msgid "Move to position X"
 msgstr "Flytta till position X"
+
+#
+#, fuzzy
+msgid "Move to the next page"
+msgstr "byt till nästa position"
+
+#
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "flytta ner till nästa post"
+
+#
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "spola bakåt till föregående kapitel"
+
+#
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "flytta upp till föregående post"
 
 #
 msgid "Move west"
@@ -5828,10 +5944,9 @@ msgstr "Multi-EPG favoritlistsval"
 msgid "MultiType"
 msgstr "Multimedia"
 
-#
 #, fuzzy
-msgid "Multiboot"
-msgstr "Multisat"
+msgid "Multiboot image selector"
+msgstr "Alla Multisat val"
 
 msgid "Multichannel PCM"
 msgstr "Multikanal PCM"
@@ -6398,6 +6513,18 @@ msgstr "Öppna inställning för tuner"
 #
 msgid "Open the movie list"
 msgstr "Öppna filmlistan"
+
+msgid "Operating LED status in deep standby mode"
+msgstr ""
+
+msgid "Operating LED status in standby mode"
+msgstr ""
+
+msgid "Operating LED status while running."
+msgstr ""
+
+msgid "Opkg"
+msgstr ""
 
 msgid "Options disable timer"
 msgstr "Val stäng av timer"
@@ -7119,7 +7246,8 @@ msgid "Press OK on your remote control to continue."
 msgstr "Tryck OK på din fjärrkontroll för att fortsätta."
 
 #
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Tryck OK för aktivera valt utseende."
 
 #
@@ -7134,6 +7262,11 @@ msgstr "Tryck OK för att ändra inställningar."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Tryck OK för att få utförligare information om %s"
+
+#
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Tryck OK för aktivera valt utseende."
 
 #
 msgid "Press OK to scan"
@@ -7347,6 +7480,10 @@ msgstr "Verkligen ta bort färdiga timerinspelningar?"
 #
 msgid "Really exit the subservices quickzap?"
 msgstr "Verkligen avsluta underkanals snabbzapp?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Skydda tillverkarens återställningsskärm"
 
 #
 msgid "Really reboot now?"
@@ -7736,6 +7873,14 @@ msgstr "Återställ"
 msgid "Restore backups"
 msgstr "Återställ säkerhetskopia"
 
+#, fuzzy
+msgid "Restore defaults"
+msgstr "Ange standard"
+
+#, fuzzy
+msgid "Restore deleted images"
+msgstr "Återställ borttagna favoritlistor"
+
 msgid "Restore deleted user bouquets"
 msgstr "Återställ borttagna favoritlistor"
 
@@ -7778,11 +7923,6 @@ msgstr "Återupptar uppspelning"
 #, fuzzy
 msgid "Retrieving image list - Please wait..."
 msgstr "Hämtar plugin information. Var vänlig vänta..."
-
-#
-#, fuzzy
-msgid "Retrieving image slots - Please wait..."
-msgstr "Söker efter tillgängliga uppdateringar. Vänligen vänta..."
 
 #
 msgid "Return to movie list"
@@ -7996,6 +8136,11 @@ msgstr "Spara"
 #, fuzzy
 msgid "Save / Enter text and exit"
 msgstr "Spara och avsluta"
+
+#
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Tryck OK för aktivera valt utseende."
 
 msgid "Save and exit"
 msgstr "Spara och avsluta"
@@ -8270,15 +8415,6 @@ msgstr ""
 msgid "Select HDD"
 msgstr "Välj HDD"
 
-#
-#, fuzzy
-msgid "Select Image"
-msgstr "Välj en film"
-
-#, fuzzy
-msgid "Select Multiboot"
-msgstr "Välj plats"
-
 #, fuzzy
 msgid "Select Softcam"
 msgstr "Välj plats"
@@ -8295,9 +8431,9 @@ msgstr "Välj en film"
 msgid "Select a network adapter"
 msgstr "Välj en nätverksadapter"
 
-#
+#, fuzzy
 msgid "Select a skin"
-msgstr "Välj ett utseende"
+msgstr "Välj åtgärd"
 
 #
 msgid "Select a tuner"
@@ -8429,8 +8565,13 @@ msgstr ""
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr ""
 
-msgid "Select the character or action under the virtual keyboard cursor"
+msgid "Select the character or action under the keyboard cursor"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Välj film sökväg"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr ""
@@ -8463,6 +8604,18 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+#
+#, fuzzy
+msgid "Select the shifted character set"
+msgstr "Välj film sökväg"
+
+msgid "Select the shifted character set for the next character only"
+msgstr ""
+
+#, fuzzy
+msgid "Select the time zone within the area or region."
+msgstr "Välj sorteringsmetod :"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -8476,15 +8629,6 @@ msgid "Select the type of LNB/device being used (normally 'Universal'). If your 
 msgstr ""
 
 msgid "Select the type of Single Cable Reception device you are using."
-msgstr ""
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 #
@@ -8503,6 +8647,9 @@ msgstr "Välj videoingång med upp / ner knapparna"
 msgid "Select video mode"
 msgstr "Välj videoläge"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 #
 msgid "Select wireless network"
 msgstr "Välj trådlöst nätverk"
@@ -8510,9 +8657,6 @@ msgstr "Välj trådlöst nätverk"
 #, fuzzy
 msgid "Select your ATSC provider."
 msgstr "ATSC operatör"
-
-msgid "Select your Skin"
-msgstr "Välj ditt utseende (Skin)"
 
 #
 msgid ""
@@ -8533,6 +8677,10 @@ msgstr "Välj din operatör och tryck OK för att starta sökningen"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
+
+#, fuzzy
+msgid "Select your time zone area or region."
+msgstr "Välj sorteringsmetod :"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Väljer satelliter 1 (USALS)"
@@ -8696,9 +8844,6 @@ msgstr "Sätt blocktider med veckodag"
 msgid "Set default"
 msgstr "Ange standard"
 
-msgid "Set default settings?"
-msgstr "Ange standardinställningar?"
-
 #
 msgid "Set end time"
 msgstr "Sätt sluttid"
@@ -8840,7 +8985,7 @@ msgstr "Visa Spel show"
 msgid "Show InfoBar"
 msgstr "Visa infobalk"
 
-msgid "Show PIP"
+msgid "Show PiP"
 msgstr "Visa BiB"
 
 msgid "Show SNR percentage instead of dB value"
@@ -9167,12 +9312,15 @@ msgstr "Platsens latitud"
 msgid "Site longitude"
 msgstr "Platsens longitud"
 
-#
-msgid "Skin"
-msgstr "Utseende"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
+msgstr ""
+
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Välj åtgärd"
+
+msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 #
@@ -9712,12 +9860,24 @@ msgstr "Undertextval..."
 msgid "Subtitle settings"
 msgstr "Undertextinställningar"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Undertextval..."
+
 #
 msgid "Subtitles"
 msgstr "Undertexter"
 
 msgid "Subtitles Settings"
 msgstr "Undertextinställningar"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Undertextinställningar"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Gränser aktiverade"
 
 msgid "Succeeded:"
 msgstr "Lyckades :"
@@ -9740,7 +9900,7 @@ msgstr "Kanalnamn"
 msgid "Svalbard and Jan Mayen"
 msgstr ""
 
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr "Skifta BiB"
 
 #
@@ -9780,6 +9940,21 @@ msgstr "Växla kanal ner"
 
 msgid "Switch channel up"
 msgstr "Växla kanal upp"
+
+#
+#, fuzzy
+msgid "Switch on the display during Standby Mode"
+msgstr "Visa lista över tillgängliga Display och Användargränssnittutökningar."
+
+#
+#, fuzzy
+msgid "Switch on the display during Suspend Mode"
+msgstr "Visa lista över tillgängliga Display och Användargränssnittutökningar."
+
+#
+#, fuzzy
+msgid "Switch on the display during operation."
+msgstr "Visa lista över tillgängliga Display och Användargränssnittutökningar."
 
 msgid "Switch to TV mode"
 msgstr "Växla till TV läge"
@@ -9865,6 +10040,9 @@ msgid "T2MI PLP ID"
 msgstr "PLP ID"
 
 msgid "T2MI RAW Mode"
+msgstr ""
+
+msgid "TEXT"
 msgstr ""
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
@@ -10443,6 +10621,16 @@ msgid "Time scale"
 msgstr "Tidskala"
 
 #
+#, fuzzy
+msgid "Time zone"
+msgstr "Tidszon"
+
+#
+#, fuzzy
+msgid "Time zone area"
+msgstr "Tidszon"
+
+#
 msgid "Timer"
 msgstr "Timer"
 
@@ -10492,6 +10680,11 @@ msgid "Timer type"
 msgstr "Timertyp"
 
 #
+#, fuzzy
+msgid "Timer:"
+msgstr "Timer"
+
+#
 msgid "Timeshift"
 msgstr "Timeshift"
 
@@ -10528,8 +10721,16 @@ msgstr "Titel egenskaper"
 msgid "Titleset mode"
 msgstr "Titelset läge"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Till ljudval"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Till undertextval"
@@ -10544,7 +10745,7 @@ msgstr "Växla HDMI In"
 msgid "Toggle LCD LiveTV"
 msgstr "Växla LCD direktsänd TV"
 
-msgid "Toggle PIPzap"
+msgid "Toggle PiPzap"
 msgstr "Växla BiBzapp"
 
 msgid "Toggle TV/RADIO mode"
@@ -10566,8 +10767,17 @@ msgstr ""
 msgid "Toggle show/hide"
 msgstr "Växla Visa / Dölj"
 
+#, fuzzy
+msgid "Toggle subtitles show/hide"
+msgstr "Växla Visa / Dölj"
+
 msgid "Toggle the tv and the radio player..."
 msgstr "Växla tv och radiospelaren..."
+
+#
+#, fuzzy
+msgid "Toggle videomode"
+msgstr "Välj videoläge"
 
 msgid "Togo"
 msgstr ""
@@ -11483,7 +11693,7 @@ msgstr ""
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Vid aktiverad laddar enigma2 olänkade favoritlistor. Detta innebär att favoritlistor som är tillgängliga men som inte ingår i bouquet.tv eller bouquet.radio filer kommer fortfarande laddas. Detta gör att du till exempel kan behålla dina egna favoritlistor medan installerade inställningar uppdateras."
 
-msgid "When enabled the PiP can be closed by the exit button."
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Vid aktiverad kan BiB stängas med exitknappen."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
@@ -11726,6 +11936,21 @@ msgstr "Med fel :"
 msgid "With popup"
 msgstr "Med popup"
 
+#, fuzzy
+msgid "With this option you can switch on the display during operation."
+msgstr "Detta val tillåter dig att stänga av displayen."
+
+#, fuzzy
+msgid "With this option you can switch on the display in Deep Standby Mode."
+msgstr "Detta val tillåter dig att stänga av displayen."
+
+#, fuzzy
+msgid "With this option you can switch on the display in Standby Mode."
+msgstr "Detta val tillåter dig att stänga av displayen."
+
+msgid "With this option you can switch the LED color or deactivate the LED."
+msgstr ""
+
 msgid "Without popup"
 msgstr "Utan popup"
 
@@ -11939,6 +12164,9 @@ msgstr "Du måste vänta %s!"
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Du måste växla till denna kanal %s (%s- '%s')!\n"
 
+msgid "You seem to be in timeshift!"
+msgstr ""
+
 #
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Din samling överstiger storleken på single layer media, du kommer behöva en tom dual layer DVD!"
@@ -12081,17 +12309,20 @@ msgid "Zap up"
 msgstr "Zappa upp"
 
 #, python-format
-msgid "Zapped to timer service %s as PiP!"
+msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr ""
 
 #, fuzzy, python-format
 msgid "Zapped to timer service %s!"
 msgstr "Gå till första tjänsten"
 
-msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
+msgid "Zgemma H.S/H.2S/H.2H/H5/H7(old model)"
 msgstr ""
 
-msgid "Zgemma H9/i55 Plus"
+msgid "Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"
+msgstr ""
+
+msgid "Zgemma H9(old model)/I55Plus"
 msgstr ""
 
 msgid "Zgemma Star S/2S/H1/H2"
@@ -12418,7 +12649,7 @@ msgstr "Fel vid skanning"
 msgid "et4000"
 msgstr ""
 
-msgid "et5000/6000"
+msgid "et5000/et6000"
 msgstr ""
 
 msgid "et8000/et10000"
@@ -12427,7 +12658,7 @@ msgstr ""
 msgid "et9000/et9100"
 msgstr ""
 
-msgid "et9200/9500/6500"
+msgid "et9200/et9500/et6500"
 msgstr ""
 
 msgid "execute cuts (requires MovieCut plugin)"
@@ -13116,6 +13347,10 @@ msgstr "mallfil"
 msgid "tennis/squash"
 msgstr "tennis / squash"
 
+#
+msgid "testing"
+msgstr "arbetar"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "denna favoritlista är skyddad av föräldraskyddskod"
 
@@ -13192,6 +13427,9 @@ msgstr "variteuppvisning"
 msgid "vertical"
 msgstr "vertikal"
 
+msgid "violet"
+msgstr ""
+
 #
 msgid "wait for ci..."
 msgstr "vänta på ci..."
@@ -13252,10 +13490,6 @@ msgstr "med tunernamn"
 
 msgid "with_errors"
 msgstr "med_fel"
-
-#
-msgid "working"
-msgstr "arbetar"
 
 msgid "xp1000"
 msgstr ""

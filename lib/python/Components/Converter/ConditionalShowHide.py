@@ -8,20 +8,36 @@ class ConditionalShowHide(Converter, object):
 		self.invert = "Invert" in args
 		self.blink = "Blink" in args
 		if self.blink:
-			self.blinktime = len(args) == 2 and args[1].isdigit() and int(args[1]) or 500
+			self.blinktime = len(args) > 1 and args[1].isdigit() and int(args[1]) or 500
+			if len(args) == 3:
+				self.asymmetric = True
+				self.blinkhide = args[2].isdigit() and int(args[2]) or 500
+			else:
+				self.asymmetric = False
 			self.timer = eTimer()
 			self.timer.callback.append(self.blinkFunc)
 		else:
 			self.timer = None
 
+	# Make ConditionalShowHide transparent to upstream attribute requests
+	def __getattr__(self, name):
+		return getattr(self.source, name)
+
 	def blinkFunc(self):
 		if self.blinking:
+			show = False
 			for x in self.downstream_elements:
 				x.visible = not x.visible
+				show = x.visible
+			if self.asymmetric:
+				self.timer.start(self.blinkhide if show else self.blinktime, True)
 
 	def startBlinking(self):
 		self.blinking = True
-		self.timer.start(self.blinktime)
+		if self.asymmetric:
+			self.timer.start(self.blinktime, True)
+		else:
+			self.timer.start(self.blinktime)
 
 	def stopBlinking(self):
 		self.blinking = False
@@ -47,6 +63,7 @@ class ConditionalShowHide(Converter, object):
 		else:
 			for x in self.downstream_elements:
 				x.visible = vis
+		super(Converter, self).changed(what)
 
 	def connectDownstream(self, downstream):
 		Converter.connectDownstream(self, downstream)

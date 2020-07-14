@@ -187,7 +187,7 @@ def InitUsageConfig():
 	config.usage.sleep_timer = ConfigSelection(default = "0", choices = choicelist)
 
 	choicelist = [("0", _("Disabled"))]
-	for i in [300, 600] + range(900, 7201, 900):
+	for i in [300, 600] + range(900, 14401, 900):
 		m = abs(i / 60)
 		m = ngettext("%d minute", "%d minutes", m) % m
 		choicelist.append((str(i), _("after ") + m))
@@ -247,6 +247,7 @@ def InitUsageConfig():
 	config.usage.remote_fallback_openwebif_userid = ConfigText(default = "root")
 	config.usage.remote_fallback_openwebif_password = ConfigPassword(default = "default")
 	config.usage.remote_fallback_openwebif_port = ConfigInteger(default=80, limits=(0,65535))
+	config.usage.remote_fallback_dvbt_region = ConfigText(default = "fallback DVB-T/T2 Europe")
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
@@ -283,10 +284,10 @@ def InitUsageConfig():
 	atsc_nims.insert(1,("-1", _("auto")))
 	config.usage.recording_frontend_priority_atsc = ConfigSelection(default = "-2", choices = atsc_nims)
 
-	SystemInfo["DVB-S_priority_tuner_available"] = len(dvbs_nims) > 3 and any(len(i) > 2 for i in (dvbt_nims, dvbc_nims, atsc_nims))
-	SystemInfo["DVB-T_priority_tuner_available"] = len(dvbt_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, atsc_nims))
-	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbt_nims, atsc_nims))
-	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims))
+	SystemInfo["DVB-S_priority_tuner_available"] = len(dvbs_nims) > 1
+	SystemInfo["DVB-T_priority_tuner_available"] = len(dvbt_nims) > 1
+	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 1
+	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 1
 
 	config.misc.disable_background_scan = ConfigYesNo(default = False)
 	config.misc.use_ci_assignment = ConfigYesNo(default = False)
@@ -598,17 +599,17 @@ def InitUsageConfig():
 			open(SystemInfo["HasHdrType"], "w").write(configElement.value)
 		config.av.hdmihdrtype = ConfigSelection(default = "auto", choices={"auto": _("Auto"), "none": _("SDR"), "hdr10": _("HDR10"), "hlg": _("HLG"), "dolby": _("Dolby")})
 		config.av.hdmihdrtype.addNotifier(setHdmiHdrType)
-		
+
 	if SystemInfo["HDRSupport"]:
 		def setHlgSupport(configElement):
 			open("/proc/stb/hdmi/hlg_support", "w").write(configElement.value)
-		config.av.hlg_support = ConfigSelection(default = "auto(EDID)", 
+		config.av.hlg_support = ConfigSelection(default = "auto(EDID)",
 			choices = [ ("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled")) ])
 		config.av.hlg_support.addNotifier(setHlgSupport)
 
 		def setHdr10Support(configElement):
 			open("/proc/stb/hdmi/hdr10_support", "w").write(configElement.value)
-		config.av.hdr10_support = ConfigSelection(default = "auto(EDID)", 
+		config.av.hdr10_support = ConfigSelection(default = "auto(EDID)",
 			choices = [ ("auto(EDID)", _("controlled by HDMI")), ("yes", _("force enabled")), ("no", _("force disabled")) ])
 		config.av.hdr10_support.addNotifier(setHdr10Support)
 
@@ -623,6 +624,7 @@ def InitUsageConfig():
 		config.av.allow_10bit.addNotifier(setDisable10Bit)
 
 	config.subtitles = ConfigSubsection()
+	config.subtitles.show = ConfigYesNo(default = True)
 	config.subtitles.ttx_subtitle_colors = ConfigSelection(default = "1", choices = [
 		("0", _("original")),
 		("1", _("white")),
