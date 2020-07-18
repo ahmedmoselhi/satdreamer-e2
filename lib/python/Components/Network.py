@@ -64,7 +64,7 @@ class Network:
 	def getAddrInet(self, iface, callback):
 		data = { 'up': False, 'dhcp': False, 'preup' : False, 'predown' : False }
 
-		if 'ip' not in data:
+	if 'ip' not in data:
 		try:
 			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
 			if data['up']:
