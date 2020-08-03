@@ -564,7 +564,7 @@ def InitUsageConfig():
 	if SystemInfo["HasBypassEdidChecking"]:
 		def setHasBypassEdidChecking(configElement):
 			open(SystemInfo["HasBypassEdidChecking"], "w").write(configElement.value)
-		config.av.bypassEdidChecking = ConfigSelection(default = "00000000", choices = [ ("00000001", _("yes")), ("00000000", _("no"))] )
+		config.av.bypassEdidChecking = ConfigSelection(default = "00000001", choices = [ ("00000001", _("yes")), ("00000000", _("no"))] )
 		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
 
 	if SystemInfo["HasColorspace"]:
