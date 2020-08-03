@@ -47,7 +47,7 @@ cmdList = {
 	}
 
 config.hdmicec = ConfigSubsection()
-config.hdmicec.enabled = ConfigYesNo(default = False)
+config.hdmicec.enabled = ConfigYesNo(default = True)
 config.hdmicec.control_tv_standby = ConfigYesNo(default = True)
 config.hdmicec.control_tv_wakeup = ConfigYesNo(default = True)
 config.hdmicec.report_active_source = ConfigYesNo(default = True)
@@ -312,13 +312,7 @@ class HdmiCec:
 
 			if config.hdmicec.debug.value != "0":
 				self.debugRx(length, cmd, data)
-			if cmd == self.lastCmd:
-				print "eHdmiCec: ignore duplicate cmd %02X" % cmd
-				return
-			else:
-				self.lastCmd = cmd
-
-                        if cmd == 0x00:
+			if cmd == 0x00:
 				if length == 0: # only polling message ( it's some as ping )
 					print "eHdmiCec: received polling message"
 				else:
